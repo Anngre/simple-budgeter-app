@@ -1,0 +1,28 @@
+.navbar {
+  background: var(--main-color);
+}
+
+.navbar ul {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 20px;
+  padding: 20px 40px;
+  margin-bottom: 80px;
+}
+
+.logo {
+  letter-spacing: 2px;
+  margin-right: auto;
+  border-bottom: 2px solid var(--highlight-color);
+}
+
+.navbar a {
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.navbar a:hover {
+  border-bottom: 2px solid var(--highlight-color);
+}

@@ -1,0 +1,18 @@
+.label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  font-size: 1.8rem;
+  border: none;
+  border-bottom: 2px solid var(--main-color);
+  transition: border-color var(--transition-fast);
+  padding: 0.5rem ;
+}
+
+.input:focus {
+  border-color: var(--highlight-color);
+}

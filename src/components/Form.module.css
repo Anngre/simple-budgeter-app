@@ -1,0 +1,14 @@
+.formContainer {
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 1px 0px 12px 0px var(--highlight-color);
+  border-radius: 8px;
+}
+
+.formContainer form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 80px 40px;
+}

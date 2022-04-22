@@ -1,0 +1,17 @@
+.btn {
+  font-size: 1.8rem;
+  color: var(--text-color);
+  letter-spacing: 1px;
+  background: var(--main-color);
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-slow);
+  width: 100%;
+}
+.btn:hover {
+  color: #fff;
+  background-color: var(--highlight-color);
+}
