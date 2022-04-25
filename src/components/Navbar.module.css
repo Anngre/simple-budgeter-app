@@ -23,6 +23,6 @@
   color: var(--text-color);
 }
 
-.navbar a:hover {
+.navbar a:hover, .navbar .active {
   border-bottom: 2px solid var(--highlight-color);
 }

@@ -1,16 +1,20 @@
 import { useState } from 'react'
 import Form from '../components/Form'
 import Input from '../components/Input'
+import { useSignUp } from '../hooks/useSignUp'
 
 export default function Signup() {
   const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { signup, error } = useSignUp()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(displayName, email, password);
+    await signup(email, password, displayName);
   }
+
+  console.log(error);
 
   return (
     <Form buttonLabel='Signup' onSubmit={handleSubmit}>
