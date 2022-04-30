@@ -6,18 +6,22 @@ export const AuthContext = createContext()
 
 
 export const AuthContextProvider = ({children}) => {
-  const [user, setUser] = useState(null)
-  const [authIsReady, setAuthIsReady] = useState(false)
-
+  const [state, setState] = useState({
+    user: null,
+    authIsReady: false
+  })
+  
   useEffect(() => {
     onAuthStateChanged(auth, user => {
-      setUser(user)
-      setAuthIsReady(true)
+      setState( {
+        user,
+        authIsReady: true
+      })
     })
   },[])
 
   return (
-    <AuthContext.Provider value={{user, authIsReady}} >
+    <AuthContext.Provider value={state} >
       {children}
     </AuthContext.Provider>
   )

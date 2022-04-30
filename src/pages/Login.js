@@ -1,21 +1,29 @@
 import { useState } from 'react'
-import Form from '../components/Form'
-import Input from '../components/Input'
+import { useLogin } from '../hooks/useLogin'
+import Form from '../components/form/Form'
+import Input from '../components/input/Input'
+import Error from '../components/error/Error'
+import Spinner from '../components/spinner/Spinner'
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  const handleSubmit = (e) => {   
+  const { login, error, isPending } = useLogin()
+  
+  const handleSubmit = async (e) => {   
     e.preventDefault()
-    console.log(email, password);
+    await login(email, password);
   }
 
-
   return (
-    <Form buttonLabel='Login' onSubmit={handleSubmit} >
-      <Input text='Email:' type='email' onChange={setEmail} value={email}/>
-      <Input text='Password:' type='password' onChange={setPassword} value={password}/>
-    </Form>
+    <>
+      {isPending ? <Spinner /> : 
+       (<Form buttonLabel='Login' onSubmit={handleSubmit} >
+          <Input text='Email:' type='email' onChange={setEmail} value={email}/>
+          <Input text='Password:' type='password' onChange={setPassword} value={password}/>
+          {error && <Error error={error}/>}
+        </Form>)
+      }
+    </>
   )
 }

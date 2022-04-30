@@ -1,4 +1,4 @@
-import Button from './Button'
+import Button from '../button/Button'
 import styles from './Form.module.css'
 
 export default function Form({ children, buttonLabel, onSubmit }) {

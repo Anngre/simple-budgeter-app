@@ -4,6 +4,7 @@
   --main-color: #b2f2bb;
   --highlight-color: #37b24d;
   --text-color: #343a40;
+  --error-color: #ff8787;
   --transition-fast: 0.15s ease-in;
   --transition-slow: 0.2s ease-in;
 }
