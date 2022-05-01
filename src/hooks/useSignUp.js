@@ -1,16 +1,12 @@
 import { useRequest } from "./useRequest"
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
-import { auth } from "../firebase/config"
+import API from "../api/API"
 
 export const useSignup = () => {
 
   const signup =  async (email, password, displayName) => {
-    await createUserWithEmailAndPassword(auth, email, password)
-
-    await updateProfile(auth.currentUser, {
-        displayName
-      })
-    }
+   
+    await API.signupUser(email, password, displayName)
+  }
 
   const { request, error, isPending } = useRequest(signup, '/')
   

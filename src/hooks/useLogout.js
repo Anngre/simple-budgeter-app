@@ -1,11 +1,10 @@
 import { useRequest } from "./useRequest"
-import { signOut } from "firebase/auth"
-import { auth } from "../firebase/config"
+import API from "../api/API"
 
 export const useLogout = () => {
  
   const logout = async () => {
-    await signOut(auth)  
+    await API.logoutUser()  
   }
 
   const { request, error, isPending } = useRequest(logout, '/login')

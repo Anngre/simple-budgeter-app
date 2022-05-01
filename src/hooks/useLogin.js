@@ -1,11 +1,10 @@
 import { useRequest } from "./useRequest"
-import { signInWithEmailAndPassword } from "firebase/auth"
-import { auth } from "../firebase/config"
+import API from "../api/API"
+
 
 export const useLogin = () => {
   const login = async (email, password) => {
-    await signInWithEmailAndPassword(auth, email, password) 
-
+    await API.loginUser(email, password) 
   }
   const { request, error, isPending } = useRequest(login, '/')
 
