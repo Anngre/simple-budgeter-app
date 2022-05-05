@@ -1,5 +1,6 @@
 import { db, auth } from './config'
 import { createUserWithEmailAndPassword, updateProfile ,signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 
 
 class API {
@@ -25,6 +26,15 @@ class API {
     return onAuthStateChanged(auth, onUserChange)
     
   }
+
+  async addDocument(collectionName, document) {
+    const docRef = await addDoc(collection(db, collectionName), {
+      ...document,
+      createdAt: serverTimestamp()
+    })
+   return docRef.id
+  }
+  
 }
 
 export default new API()

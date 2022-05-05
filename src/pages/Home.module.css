@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+}
+
+.sidebarContainer {
+  width: 20rem;
+  height: 100vh;
+  text-align: center;
+  border-right: 2px solid var(--main-color);
+}
+
+.budgetContainer { 
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin: 8rem auto 0 auto;
+  padding: 0 2rem;
+}
+
+.createBox {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  padding: 4px 0;
+  border-top: 1px solid var(--highlight-color);
+  border-bottom: 1px solid var(--highlight-color);
+}
+
+
+.createBox p{
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.createBox Button{
+  width: 20%;
+  text-transform: uppercase;
+  margin-left: auto;
+}

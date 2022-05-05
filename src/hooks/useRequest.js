@@ -10,7 +10,9 @@ export const useRequest = (action, path) => {
       setError(null)
       setIsPending(true)
       await action(...params)
-      navigate(path)
+      if (path) {
+        navigate(path)
+      }
     } catch (error) {
         setError(error.message)
       } finally {
