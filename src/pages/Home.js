@@ -1,19 +1,26 @@
-import { useState } from 'react'
-import { context, useAuthContext } from '../hooks/useAuthContext'
+import { useEffect, useState } from 'react'
+import { useAuthContext } from '../hooks/useAuthContext'
 import { useAddDocument } from '../hooks/useAddDocument'
+import { useUpdateDocument } from '../hooks/useUpdateDocument'
+import { useGetDocument } from '../hooks/useGetDocument'
 import Spinner from '../components/spinner/Spinner'
 import Error from '../components/error/Error'
 import Form from '../components/form/Form'
 import Input from '../components/input/Input'
 import Button from '../components/button/Button'
 import styles from './Home.module.css'
+import Income from '../components/income/Income'
 
 
 export default function Home() {
   const [isCreateBoxVisible, setIsCreateBoxVisible] = useState(false)
   const [budgetTitle, setBudgetTitle] = useState('')
   const { user } = useAuthContext()
-  const { docID, addDocument, error, isPending } = useAddDocument()
+  const { addDocument, isPending: addDocIsPending, error: addDocError, docID: newBudgetID } = useAddDocument()
+  const { updateDocument, isPending: updateDocIsPending, error: updateDocError } = useUpdateDocument()
+  const userDoc = useGetDocument('users', user.uid)
+  const currentBudgetID = userDoc?.currentBudgetID || newBudgetID
+  const currentBudget = useGetDocument('budgets', currentBudgetID)
 
   const handleClick = () => {
     setIsCreateBoxVisible(true)
@@ -29,21 +36,32 @@ export default function Home() {
     })
   }
 
-  if (isPending) {
+  useEffect(() => {
+    if (newBudgetID) {
+      updateDocument('users', user.uid, {
+        currentBudgetID: newBudgetID
+      })
+    }
+  },[newBudgetID])
+
+
+  
+
+  if (addDocIsPending || updateDocIsPending) {
     return <Spinner />
   }
 
-  if (error) {
-    return <Error error={error}/>
+  if (addDocError || updateDocError) {
+    return <Error error={addDocError || updateDocError}/>
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.sidebarContainer}>sidebar</div>
       <div className={styles.budgetContainer}>    
-        {docID ?
+        {currentBudget ?
           <>
-            <p>Incomes</p>
+            <Income currentBudget={currentBudget}/>
             <p>Budgets</p>
           </> : (
             <>

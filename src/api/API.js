@@ -1,6 +1,6 @@
 import { db, auth } from './config'
 import { createUserWithEmailAndPassword, updateProfile ,signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { addDoc, collection, serverTimestamp, doc, setDoc, onSnapshot } from 'firebase/firestore'
 
 
 class API {
@@ -22,9 +22,7 @@ class API {
   }
 
   observeUser(onUserChange) {
-    
-    return onAuthStateChanged(auth, onUserChange)
-    
+    return onAuthStateChanged(auth, onUserChange)   
   }
 
   async addDocument(collectionName, document) {
@@ -33,6 +31,15 @@ class API {
       createdAt: serverTimestamp()
     })
    return docRef.id
+   
+  }
+
+  async updateDocument(collectionName, docID, document) {
+    await setDoc(doc(db, collectionName, docID), document)
+  }
+
+  observeDocument(collectionName,  docID, onDocChange) {
+    return onSnapshot(doc(db, collectionName, docID), onDocChange)
   }
   
 }

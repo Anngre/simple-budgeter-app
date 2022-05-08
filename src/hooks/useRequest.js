@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom"
 export const useRequest = (action, path) => {
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
+  const [result, setResult] = useState(null)
   const navigate = useNavigate()
   const request = async (...params) => {
     try {
       setError(null)
       setIsPending(true)
-      await action(...params)
+      setResult(await action(...params))
       if (path) {
         navigate(path)
       }
@@ -20,5 +21,5 @@ export const useRequest = (action, path) => {
       }
     
   } 
-  return { request, error, isPending }
+  return { request, error, isPending, result }
 }
