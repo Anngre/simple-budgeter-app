@@ -2,7 +2,6 @@
   font-size: 1.8rem;
   color: var(--text-color);
   letter-spacing: 1px;
-  background: var(--main-color);
   text-align: center;
   padding: 8px 12px;
   border-radius: 8px;
@@ -11,7 +10,21 @@
   transition: all var(--transition-slow);
   width: 100%;
 }
-.btn:hover {
+
+.btnGreen {
+  background: var(--main-color);
+
+}
+.btnGreen:hover {
   color: #fff;
   background-color: var(--highlight-color);
+}
+
+.btnRed {
+  background: var(--secondary-color);
+}
+
+.btnRed:hover {
+  background: var(--contrast-color);
+  color: #fff;
 }
