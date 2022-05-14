@@ -38,8 +38,8 @@ class API {
     await setDoc(doc(db, collectionName, docID), document)
   }
 
-  observeDocument(collectionName,  docID, onDocChange) {
-    return onSnapshot(doc(db, collectionName, docID), onDocChange)
+  observeDocument(collectionName,  docID, onDocChange, onDocChangeError) {
+    return onSnapshot(doc(db, collectionName, docID), onDocChange, onDocChangeError)
   }
   
 }

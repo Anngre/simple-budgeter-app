@@ -18,9 +18,9 @@ export default function Home() {
   const { user } = useAuthContext()
   const { addDocument, isPending: addDocIsPending, error: addDocError, docID: newBudgetID } = useAddDocument()
   const { updateDocument, isPending: updateDocIsPending, error: updateDocError } = useUpdateDocument()
-  const userDoc = useGetDocument('users', user.uid)
+  const { document: userDoc } = useGetDocument('users', user.uid)
   const currentBudgetID = userDoc?.currentBudgetID || newBudgetID
-  const currentBudget = useGetDocument('budgets', currentBudgetID)
+  const { document: currentBudget, isPending: getCurrentBudgetIsPending, error: getCurrentBudgetError, } = useGetDocument('budgets', currentBudgetID)
 
   const handleClick = () => {
     setIsCreateBoxVisible(true)
@@ -31,7 +31,8 @@ export default function Home() {
     await addDocument('budgets', {
       budgetTitle,
       createdBy: user.uid,
-      incomes: [],
+      incomes: [{type: '', amount: ''}],
+      incomesSum: 0,
       categories: []     
     })
   }
@@ -47,12 +48,12 @@ export default function Home() {
 
   
 
-  if (addDocIsPending || updateDocIsPending) {
+  if (addDocIsPending || updateDocIsPending || getCurrentBudgetIsPending) {
     return <Spinner />
   }
 
-  if (addDocError || updateDocError) {
-    return <Error error={addDocError || updateDocError}/>
+  if (addDocError || updateDocError || getCurrentBudgetError) {
+    return <Error error={addDocError || updateDocError || getCurrentBudgetError}/>
   }
 
   return (
