@@ -6,14 +6,14 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 
 function App() {
-  const {authIsReady} = useAuthContext()
+  const {user, authIsReady} = useAuthContext()
   return (
     <div className="App">
       { authIsReady &&
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={user ? <Home /> : <Login />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
         </Routes>     
