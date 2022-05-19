@@ -3,8 +3,8 @@ import API from "../api/API";
 import { useState } from "react";
 
 export const useAddDocument = () => {
-  const addDocument = async (collectionName, document) => {
-    const id = await API.addDocument(collectionName, document)
+  const addDocument = async (collectionName, document,  docID) => {
+    const id = await API.addDocument(collectionName, document, docID)
     return id
   }
 

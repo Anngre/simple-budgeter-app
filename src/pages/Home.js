@@ -18,9 +18,10 @@ export default function Home() {
   const { user } = useAuthContext()
   const { addDocument, isPending: addDocIsPending, error: addDocError, docID: newBudgetID } = useAddDocument()
   const { updateDocument, isPending: updateDocIsPending, error: updateDocError } = useUpdateDocument()
-  const { document: userDoc } = useGetDocument('users', user.uid)
+  const { document: userDoc, isPending: userDocIsPending, error: userDocError} = useGetDocument('users', user.uid)
   const currentBudgetID = userDoc?.currentBudgetID || newBudgetID
-  const { document: currentBudget, isPending: getCurrentBudgetIsPending, error: getCurrentBudgetError, } = useGetDocument('budgets', currentBudgetID)
+  const { document: currentBudget, isPending: getCurrentBudgetIsPending, error: getCurrentBudgetError } = useGetDocument('budgets', currentBudgetID)
+
 
   const handleClick = () => {
     setIsCreateBoxVisible(true)
@@ -39,21 +40,21 @@ export default function Home() {
 
   useEffect(() => {
     if (newBudgetID) {
-      updateDocument('users', user.uid, {
+      addDocument('users',{
         currentBudgetID: newBudgetID
-      })
+      }, user.uid)
     }
   },[newBudgetID])
 
 
   
 
-  if (addDocIsPending || updateDocIsPending || getCurrentBudgetIsPending) {
+  if (addDocIsPending || updateDocIsPending || getCurrentBudgetIsPending || userDocIsPending) {
     return <Spinner />
   }
 
-  if (addDocError || updateDocError || getCurrentBudgetError) {
-    return <Error error={addDocError || updateDocError || getCurrentBudgetError}/>
+  if (addDocError || updateDocError || getCurrentBudgetError || userDocError) {
+    return <Error error={addDocError || updateDocError || getCurrentBudgetError || userDocError}/>
   }
 
   return (

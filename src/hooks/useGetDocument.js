@@ -8,7 +8,7 @@ export const useGetDocument = (collectionName, docID) => {
     if (docID) {
       setIsPending(true)
       const unsub = API.observeDocument(collectionName, docID, (doc) => {
-        setDocument(doc.data())   
+        setDocument({...doc.data(), docID})   
         setIsPending(false)
       }, (error) => {
           setError(error.message)
