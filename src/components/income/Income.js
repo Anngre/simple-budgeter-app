@@ -1,8 +1,10 @@
 import React, { useMemo, useState } from 'react'
 import { useUpdateDocument } from '../../hooks/useUpdateDocument'
-import SectionTitle from '../../section/SectionTitle'
+import SectionTitle from '../section/SectionTitle'
 import Error from '../error/Error'
 import styles from './Income.module.css'
+import InputCell from '../input/InputCell'
+import ColumnHeader from '../section/ColumnHeader'
 
 
 export default function Income({currentBudget}) {
@@ -25,18 +27,18 @@ export default function Income({currentBudget}) {
     }
   }
 
-  const handleChange = (key, value, index) => {
+  const handleChange = (value, index, name) => {
     setIncomes(incomes.map((income, i) => { 
       if(i !== index) {
         return income
       }  
-      return (key === 'type' ? {...income, type: value || ''} : {...income, amount: parseFloat(value) || 0}) 
+      return (name === 'type' ? {...income, type: value || ''} : {...income, amount: parseFloat(value) || 0}) 
     }))
   }
 
   const handleAmountChange = (value, index) => {
     // FIXME: Cannot remove single 0
-      handleChange('amount', value, index)
+      handleChange(value, index, 'amount')
   }
 
   const handleKeyUp = (e) => {
@@ -54,12 +56,12 @@ export default function Income({currentBudget}) {
       <h3 className={styles.budgetTitle}>{currentBudget.budgetTitle}</h3>
       <SectionTitle title='Incomes:' handleAddClick={handleAddClick} handleDelClick={handleDelClick}/>
       <div className={styles.incomes}>
-        <span className={styles.inputType}>Type of the income:</span>
-        <span className={styles.inputType}>Amount:</span>
+        <ColumnHeader text='Type of the income' />
+        <ColumnHeader text='Amount' />
         {incomes.map((income, i) => {
           return (<React.Fragment key={i}>
-            <input className={styles.incomeInput} type='text' value={income.type || ''} onChange={(e) => handleChange('type', e.target.value, i)} onKeyUp={handleKeyUp} onBlur={handleBlur}></input>
-            <input className={styles.incomeInput} type='number' value={income.amount.toString()} onChange={(e)=>handleAmountChange(e.target.value, i)} onKeyUp={handleKeyUp} onBlur={handleBlur}></input>
+            <InputCell index={i} type='text' value={income.type || ''} handleChange={handleChange} name='type' onKeyUp={handleKeyUp} handleBlur={handleBlur}/>
+            <InputCell index={i} type='number' value={income.amount.toString()} handleChange={handleAmountChange} name='amount' onKeyUp={handleKeyUp} handleBlur={handleBlur}/>
           </React.Fragment>)
         })}
         
@@ -67,7 +69,6 @@ export default function Income({currentBudget}) {
         <div className={styles.incomeTotalAmount}>{incomesSum}</div>
       </div>
       {error && <Error error='There was a problem with saving the data. Please type your update again.'/>}
-
     </div>
   )
 }

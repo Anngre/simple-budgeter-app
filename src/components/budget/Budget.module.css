@@ -1,0 +1,70 @@
+.budgetContainer {
+  max-width: 100rem;
+}
+
+.budgets, .expensesDetails {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6rem minmax(0, 1fr) minmax(0, 1fr)  minmax(0, 1fr);;
+}
+
+.budgets {
+  column-gap: 1.2rem;
+  width: 100%;
+  font-size: 1.2rem;
+  align-items: end;
+  padding: 1rem 10px;
+}
+
+.inputType {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  padding: 0 5px;
+}
+
+.expensesContainer  {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  padding: 0 10px;
+}
+
+.expensesHeader {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid var(--highlight-color);
+  padding-bottom: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.expensesHeader Button {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 1.5rem;
+  padding: 5px 5px;
+}
+
+.icon {
+  margin-left: auto; 
+  background: var(--main-color);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  transition: var(--transition-fast);  
+}
+
+.icon:hover {
+  cursor: pointer;
+  background: var(--highlight-color);
+}
+
+.expensesDetails {
+  gap: 0.3rem 1.2rem;
+}
+
+
+
+
+  

@@ -10,6 +10,7 @@ import Input from '../components/input/Input'
 import Button from '../components/button/Button'
 import styles from './Home.module.css'
 import Income from '../components/income/Income'
+import Budget from '../components/budget/Budget'
 
 
 export default function Home() {
@@ -64,7 +65,7 @@ export default function Home() {
         {currentBudget ?
           <>
             <Income currentBudget={currentBudget}/>
-            <p>Budgets</p>
+            <Budget currentBudget={currentBudget}/>
           </> : (
             <>
           {isCreateBoxVisible ? (

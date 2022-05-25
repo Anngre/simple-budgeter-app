@@ -1,4 +1,4 @@
-import Button from '../components/button/Button'
+import Button from '../button/Button'
 import styles from './SectionTitle.module.css'
 
 export default function SectionTitle({title, handleAddClick, handleDelClick}) {
