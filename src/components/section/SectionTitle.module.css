@@ -7,17 +7,34 @@
   margin-top: 10px;
 }
 
-.title {
+.titleRegular, .titleSmall {
   text-transform: uppercase;
-  margin-right: auto;
   font-weight: 500;
 }
 
-.titleContainer Button {
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  font-size: 2rem;
-  padding: 5px 5px;
+.titleSmall {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 2px;
 }
+
+.icon {
+  display: flex;
+  background: var(--main-color);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  transition: var(--transition-fast);  
+}
+
+.icon:hover {
+  cursor: pointer;
+  background: var(--highlight-color);
+}
+
+.buttonsContainer {
+  display: flex;
+  margin-left: auto;
+}
+
 

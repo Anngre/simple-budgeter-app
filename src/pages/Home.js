@@ -75,7 +75,7 @@ export default function Home() {
           ) : (
             <div className={styles.createBox}>
               <p>Manage your money:</p>
-              <Button label='start' onClick={handleClick}/>
+              <Button label='start' onClick={handleClick} type='square' size='regular' color='green'/>
             </div>
           )}
         </>

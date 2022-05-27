@@ -18,7 +18,7 @@ export default function Login() {
   return (
     <>
       {isPending ? <Spinner /> : 
-       (<Form buttonLabel='Login' onSubmit={handleSubmit} >
+       (<Form buttonLabel='Login' onSubmit={handleSubmit}>
           <Input text='Email:' type='email' onChange={setEmail} value={email}/>
           <Input text='Password:' type='password' onChange={setPassword} value={password}/>
           {error && <Error error={error}/>}

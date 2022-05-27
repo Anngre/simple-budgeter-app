@@ -1,9 +1,7 @@
 import SectionTitle from '../section/SectionTitle'
-import Icon from '../Icon/Icon'
-import styles from './Budget.module.css'
-import Button from '../button/Button'
 import InputCell from '../input/InputCell'
 import ColumnHeader from '../section/ColumnHeader'
+import styles from './Budget.module.css'
 
 
 export default function Budget() {
@@ -23,17 +21,7 @@ export default function Budget() {
         <InputCell type='text' />
       </div>
       <div className={styles.expensesContainer}>
-        <div className={styles.expensesHeader}>
-          <span className={styles.inputType}>Expenses</span>
-          <Button label='+' />
-          <Button label='-' color='red'/>
-          <div className={styles.icon} tabIndex='0'>
-            <Icon  name='showIcon' />
-          </div>
-          <div className={styles.icon} tabIndex='0'>
-            <Icon  name='hideIcon' />
-          </div>
-        </div>
+        <SectionTitle title='expenses' isExpandable={true} size='small'/>
         <div className={styles.expensesDetails}>
           <ColumnHeader text='Name' size='small' />
           <ColumnHeader text='Amount' size='small' style={{gridColumn: '4/-1'}} />

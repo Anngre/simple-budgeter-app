@@ -1,8 +1,26 @@
+import { useEffect, useState } from 'react'
 import styles from './Button.module.css'
 
+const buttonClasses  = {
+  //general
+  btn: styles.btn,
+  //types
+  square: styles.btnSquare,
+  circle: styles.btnCircle,
+  //colors
+  red: styles.btnRed,
+  green: styles.btnGreen,
+  //sizes
+  regular: styles.btnRegular,
+  medium: styles.btnMedium,
+  small: styles.btnSmall
+}
+export default function Button({label, onClick, type='square', size='regular', color}) {
 
-export default function Button({label, onClick, color='green'}) {
+  const className = `${buttonClasses.btn} ${buttonClasses[type]} ${buttonClasses[size]} ${buttonClasses[color]}`
+  
+
   return (
-    <button className={` ${styles.btn} ${color === 'red' ? styles.btnRed : styles.btnGreen}`} onClick={onClick}>{label}</button>
+    <button className={className} onClick={onClick}>{label}</button>
   )
 }

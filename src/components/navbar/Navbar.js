@@ -32,7 +32,7 @@ export default function Navbar() {
           (<>
             <li><NavLink className={({ isActive }) => isActive ? styles.active : ''} to='/login'>Login</NavLink></li>
             <li><NavLink className={({ isActive }) => isActive ? styles.active : ''} to='/signup'>Signup</NavLink></li>
-          </>) : (<li><Button label='Logout' onClick={handleClick}/></li>)}     
+          </>) : (<li><Button label='Logout' onClick={handleClick} color='green'/></li>)}     
         </ul>
       </div>
      

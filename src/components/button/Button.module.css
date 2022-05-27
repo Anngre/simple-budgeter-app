@@ -2,30 +2,52 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
   color: var(--text-color);
   letter-spacing: 1px;
-  text-align: center;
-  padding: 8px 12px;
-  border-radius: 8px;
   cursor: pointer;
   border: none;
   transition: all var(--transition-slow);
   width: 100%;
 }
 
+.btnSquare {
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.btnCircle {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+}
+
 .btnGreen {
   background: var(--main-color);
-
-}
-.btnGreen:hover {
-  color: #fff;
-  background-color: var(--highlight-color);
 }
 
 .btnRed {
   background: var(--secondary-color);
 }
+
+.btnRegular {
+  font-size: 2rem;
+}
+
+.btnMedium {
+  font-size: 1.8rem;
+  padding: 15px 15px;
+}
+
+.btnSmall {
+  font-size: 1.4rem;
+}
+
+
+.btnGreen:hover {
+  color: #fff;
+  background-color: var(--highlight-color);
+}
+
 
 .btnRed:hover {
   background: var(--contrast-color);
