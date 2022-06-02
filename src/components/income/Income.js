@@ -9,7 +9,7 @@ import ColumnHeader from '../section/ColumnHeader'
 
 export default function Income({currentBudget}) {
   const [incomes, setIncomes] = useState(currentBudget.incomes)
-  const { updateDocument, error} =useUpdateDocument()
+  const { updateDocument, error} = useUpdateDocument()
   const incomesSum = useMemo(() => {
     return incomes.reduce((acc, income) => {
       return acc + income.amount

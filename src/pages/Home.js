@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { useAddDocument } from '../hooks/useAddDocument'
-import { useUpdateDocument } from '../hooks/useUpdateDocument'
 import { useGetDocument } from '../hooks/useGetDocument'
 import Spinner from '../components/spinner/Spinner'
 import Error from '../components/error/Error'
@@ -18,11 +17,9 @@ export default function Home() {
   const [budgetTitle, setBudgetTitle] = useState('')
   const { user } = useAuthContext()
   const { addDocument, isPending: addDocIsPending, error: addDocError, docID: newBudgetID } = useAddDocument()
-  const { updateDocument, isPending: updateDocIsPending, error: updateDocError } = useUpdateDocument()
   const { document: userDoc, isPending: userDocIsPending, error: userDocError} = useGetDocument('users', user.uid)
   const currentBudgetID = userDoc?.currentBudgetID || newBudgetID
   const { document: currentBudget, isPending: getCurrentBudgetIsPending, error: getCurrentBudgetError } = useGetDocument('budgets', currentBudgetID)
-
 
   const handleClick = () => {
     setIsCreateBoxVisible(true)
@@ -33,9 +30,17 @@ export default function Home() {
     await addDocument('budgets', {
       budgetTitle,
       createdBy: user.uid,
-      incomes: [{type: '', amount: ''}],
+      incomes: [{type: '', amount: 0}],
       incomesSum: 0,
-      categories: []     
+      categories: [{
+        name: '',
+        share: 0,
+        startingBalance: 0,
+        expenses: [{
+          name: '',
+          amount: 0
+        }],
+      }]    
     })
   }
 
@@ -50,12 +55,12 @@ export default function Home() {
 
   
 
-  if (addDocIsPending || updateDocIsPending || getCurrentBudgetIsPending || userDocIsPending) {
+  if (addDocIsPending || getCurrentBudgetIsPending || userDocIsPending) {
     return <Spinner />
   }
 
-  if (addDocError || updateDocError || getCurrentBudgetError || userDocError) {
-    return <Error error={addDocError || updateDocError || getCurrentBudgetError || userDocError}/>
+  if (addDocError  || getCurrentBudgetError || userDocError) {
+    return <Error error={addDocError || getCurrentBudgetError || userDocError}/>
   }
 
   return (

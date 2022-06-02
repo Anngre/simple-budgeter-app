@@ -1,16 +1,16 @@
+import { useState } from 'react'
 import Button from '../button/Button'
 import Icon from '../Icon/Icon'
 import styles from './SectionTitle.module.css'
 
-export default function SectionTitle({title, handleAddClick, handleDelClick, isExpandable, size}) {
+export default function SectionTitle({title, handleAddClick, handleDelClick, handleClick, index, isContainerVisible, size}) {
   const buttonSize = size === 'small' ? 'small' : 'medium'
   return (
     <div className={styles.titleContainer}>
         <h4 className={size === 'small' ? styles.titleSmall : styles.titleRegular}>{title}</h4>
-        {isExpandable && 
-        <div className={styles.icon} tabIndex='0'>
-          <Icon name='showIcon' /> 
-          {/* <Icon name='hideIcon' /> */}
+        {isContainerVisible !== undefined && 
+        <div className={styles.icon} onClick={() => handleClick(index)} tabIndex='0'>
+          <Icon name={isContainerVisible ? 'hideIcon' : 'showIcon'} />
         </div>}
         <div className={styles.buttonsContainer}>
           <Button label='+' onClick={handleAddClick} type='circle' size={buttonSize} color='green'/>

@@ -28,13 +28,13 @@ class API {
   async addDocument(collectionName, document, docID) {
     if (docID) {
       await setDoc(doc(db, collectionName, docID), document)
-      return docID
-    }
-    const docRef = await addDoc(collection(db, collectionName), {
-      ...document,
-      createdAt: serverTimestamp()
-    })
-   return docRef.id
+    } else {
+        const docRef = await addDoc(collection(db, collectionName), {
+          ...document,
+          createdAt: serverTimestamp()
+        })
+        return docRef.id
+      }
   }
 
   async updateDocument(collectionName, docID, data) {
