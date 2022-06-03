@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useUpdateDocument } from '../../hooks/useUpdateDocument'
 import SectionTitle from '../section/SectionTitle'
 import Error from '../error/Error'
@@ -7,15 +7,19 @@ import InputCell from '../input/InputCell'
 import ColumnHeader from '../section/ColumnHeader'
 
 
-export default function Income({currentBudget}) {
+export default function Income({currentBudget, setIncomesSum}) {
   const [incomes, setIncomes] = useState(currentBudget.incomes)
   const { updateDocument, error} = useUpdateDocument()
+
   const incomesSum = useMemo(() => {
     return incomes.reduce((acc, income) => {
       return acc + income.amount
    }, 0)
   },[incomes])
 
+  useEffect(() =>  {
+    setIncomesSum(incomesSum)
+  },[incomesSum])
 
   const handleAddClick = () => {
     setIncomes([...incomes, {type: '', amount: 0}])

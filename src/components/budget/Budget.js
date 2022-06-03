@@ -5,17 +5,18 @@ import styles from './Budget.module.css'
 import React, { useEffect, useState } from 'react'
 
 
-export default function Budget({currentBudget}) {
+export default function Budget({currentBudget, incomesSum}) {
   const [categories, setCategories] = useState(currentBudget.categories)
-  const { incomesSum }  = currentBudget
   const [expensesState, setExpensesState] = useState(categories.map((category) => {
     return false
   }))
 
   console.log(categories);
-  useEffect(() => setCategories(categories.map((category) => {
-    return {...category, startingBalance: category.share / 100 * incomesSum}
-  })),[incomesSum])
+  useEffect(() => {
+    setCategories(categories.map((category) => {
+      return {...category, startingBalance: category.share /100 * incomesSum }
+    }))
+  }, [incomesSum])
 
   const handleAddClick = () => {
     setCategories([...categories, {
@@ -35,7 +36,7 @@ export default function Budget({currentBudget}) {
     }
   }
 
-  const handleClick = (index) => {
+  const handleIconClick = (index) => {
     setExpensesState(expensesState.map((expense, i) => index === i ? !expense : expense
     ))
   }
@@ -80,7 +81,7 @@ export default function Budget({currentBudget}) {
           <InputCell disabled={true} type='text' />
         </div>
         <div className={styles.expensesContainer}>
-          <SectionTitle title='expenses' handleClick={handleClick} index={i} isContainerVisible={expensesState[i]} size='small'/>
+          <SectionTitle title='expenses' handleIconClick={handleIconClick} index={i} isContainerVisible={expensesState[i]} size='small'/>
           <div className={styles.expensesDetails}>
             {expensesState[i] &&
             <>

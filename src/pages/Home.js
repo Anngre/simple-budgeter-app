@@ -20,6 +20,8 @@ export default function Home() {
   const { document: userDoc, isPending: userDocIsPending, error: userDocError} = useGetDocument('users', user.uid)
   const currentBudgetID = userDoc?.currentBudgetID || newBudgetID
   const { document: currentBudget, isPending: getCurrentBudgetIsPending, error: getCurrentBudgetError } = useGetDocument('budgets', currentBudgetID)
+  const [incomesSum, setIncomesSum] = useState(null)
+
 
   const handleClick = () => {
     setIsCreateBoxVisible(true)
@@ -69,8 +71,8 @@ export default function Home() {
       <div className={styles.budgetContainer}>    
         {currentBudget ?
           <>
-            <Income currentBudget={currentBudget}/>
-            <Budget currentBudget={currentBudget}/>
+            <Income currentBudget={currentBudget} setIncomesSum={setIncomesSum}/>
+            <Budget currentBudget={currentBudget} incomesSum={incomesSum}/>
           </> : (
             <>
           {isCreateBoxVisible ? (
