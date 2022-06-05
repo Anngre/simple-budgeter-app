@@ -13,8 +13,8 @@ export default function SectionTitle({title, handleAddClick, handleDelClick, han
           <Icon name={isContainerVisible ? 'hideIcon' : 'showIcon'} />
         </div>}
         <div className={styles.buttonsContainer}>
-          <Button label='+' onClick={handleAddClick} type='circle' size={buttonSize} color='green'/>
-          <Button label='-' onClick={handleDelClick} type='circle' size={buttonSize} color='red'/>
+          <Button label='+' onClick={() => handleAddClick(index)} type='circle' size={buttonSize} color='green'/>
+          <Button label='-' onClick={() => handleDelClick(index)} type='circle' size={buttonSize} color='red'/>
         </div>
       </div>
   )

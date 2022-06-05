@@ -36,6 +36,27 @@ export default function Budget({currentBudget, incomesSum}) {
     }
   }
 
+  const handleAddExpClick = (index) => {
+    setCategories(categories.map((category, i) => {
+      return i === index ? {...category, expenses: [...category.expenses, {amount: 0, name: ''}]} : category
+    }))
+    setExpensesState(expensesState.map((expense, i) => {
+      return i === index ? true : expense
+    }))
+  }
+
+  const handleDelExpClick = (index) => {
+    setCategories(categories.map((category, i) => {
+      if (category.expenses.length === 1) {
+        setExpensesState(expensesState.map((expense, expIndex) => {
+          return expIndex === index ? false : expense
+        }))
+      }
+      return i === index ? {...category, expenses: category.expenses.slice(0, -1)} : category
+    }))
+    
+  }
+
   const handleIconClick = (index) => {
     setExpensesState(expensesState.map((expense, i) => index === i ? !expense : expense
     ))
@@ -81,14 +102,20 @@ export default function Budget({currentBudget, incomesSum}) {
           <InputCell disabled={true} type='text' />
         </div>
         <div className={styles.expensesContainer}>
-          <SectionTitle title='expenses' handleIconClick={handleIconClick} index={i} isContainerVisible={expensesState[i]} size='small'/>
+          <SectionTitle title='expenses' handleAddClick={handleAddExpClick} handleDelClick={handleDelExpClick} handleIconClick={handleIconClick} index={i} isContainerVisible={expensesState[i]} size='small'/>
           <div className={styles.expensesDetails}>
-            {expensesState[i] &&
+            {category.expenses.length > 0 && expensesState[i] &&
             <>
               <ColumnHeader text='Name' size='small' />
               <ColumnHeader text='Amount' size='small' style={{gridColumn: '4/-1'}} />
-              <InputCell type='text' size='small' style={{gridColumn: '1/4'}}/>
-              <InputCell type='text' size='small' style={{gridColumn: '4/-1', width: '50%'}} /> 
+              {category.expenses.map((expense, expIndex) => {
+                return (
+                  <React.Fragment  key={expIndex}>
+                    <InputCell type='text' size='small' style={{gridColumn: '1/4'}}/>
+                    <InputCell type='text' size='small' style={{gridColumn: '4/-1', width: '50%'}} /> 
+                  </React.Fragment>
+                )
+              })}
             </>}
           </div>
         </div>
