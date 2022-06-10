@@ -1,8 +1,10 @@
+import React, { useEffect, useState, useMemo } from 'react'
+import { useUpdateDocument } from '../../hooks/useUpdateDocument'
 import SectionTitle from '../section/SectionTitle'
 import InputCell from '../input/InputCell'
 import ColumnHeader from '../section/ColumnHeader'
+import Error from '../error/Error'
 import styles from './Budget.module.css'
-import React, { useEffect, useState } from 'react'
 
 
 export default function Budget({currentBudget, incomesSum}) {
@@ -11,10 +13,23 @@ export default function Budget({currentBudget, incomesSum}) {
     return false
   }))
 
+  const categoryStates = categories.map((category) => {
+    const expensesSum = Math.round((category.expenses.reduce((acc, expense) => {
+      return (acc + expense.amount)
+    }, 0)) * 100) / 100
+    return {
+      expensesSum,
+      finalBalance: category.startingBalance - expensesSum
+    }
+  })
+
   console.log(categories);
+  const { updateDocument, error } = useUpdateDocument()
+  
+
   useEffect(() => {
     setCategories(categories.map((category) => {
-      return {...category, startingBalance: category.share /100 * incomesSum }
+      return {...category, startingBalance: Math.round(category.share * incomesSum) / 100 }
     }))
   }, [incomesSum])
 
@@ -23,10 +38,8 @@ export default function Budget({currentBudget, incomesSum}) {
       name: '',
       share: 0,
       startingBalance: 0,
-      expenses: [{
-        name: '',
-        amount: 0
-      }]}])
+      expenses: []
+    }])
     setExpensesState([...expensesState, false])
   }
   const handleDelClick = () => {
@@ -47,7 +60,7 @@ export default function Budget({currentBudget, incomesSum}) {
 
   const handleDelExpClick = (index) => {
     setCategories(categories.map((category, i) => {
-      if (category.expenses.length === 1) {
+      if (i === index && category.expenses.length === 1) {
         setExpensesState(expensesState.map((expense, expIndex) => {
           return expIndex === index ? false : expense
         }))
@@ -62,7 +75,7 @@ export default function Budget({currentBudget, incomesSum}) {
     ))
   }
 
-  const handleChange = (value, index, name) => {
+  const handleChange = (value, index, name, extraData) => {
     setCategories(categories.map((category, i) => {
       if (i !== index) {
         return category
@@ -71,11 +84,22 @@ export default function Budget({currentBudget, incomesSum}) {
         case 'name':
           return {...category, name: value}
         case 'share':
-          if (0 <= parseFloat(value) &&  parseFloat(value) <= 100) {
-            return {...category, share: parseFloat(value), startingBalance: parseFloat(value) / 100 * incomesSum}
-          } else {
+          const share = parseFloat(value)
+          if (share >= 0  && categories.reduce((acc, category, i) => {
+            return acc + (index === i ? share : category.share)
+          }, 0) <= 100) {
+            return {...category, share, startingBalance: Math.round(share * incomesSum) / 100}
+          }       
+         else {
             return {...category, share: 0, startingBalance: 0}
-          }         
+          }
+        case 'expenseName':
+        case 'expenseAmount':
+          return {...category, expenses: category.expenses.map((expense, expIndex) => {
+            if  (expIndex === extraData.expIndex) {
+              return extraData.name === 'expenseName' ? {...expense, name: value} : {...expense, amount: parseFloat(value) || 0}
+            } else return expense
+          })}    
         default:
           return category
         }
@@ -83,23 +107,30 @@ export default function Budget({currentBudget, incomesSum}) {
     ))
   }
 
+  const handleBlur  = () => {
+    updateDocument('budgets', currentBudget.docID, {
+      categories
+    })
+  }
+
   return (
     <div className={styles.budgetContainer}>
       <SectionTitle title='Budget categories:' handleAddClick={handleAddClick} handleDelClick={handleDelClick}/>
+      {error && <Error error='There was a problem with saving your data. Please type your changes in budget categories again.'/>}
       {categories.map((category, i) => {
         return ( 
-      <React.Fragment key={i}>
+      <div className={styles.categoryContainer} key={i}>
         <div className={styles.budgets}>
           <ColumnHeader text='Name' />
           <ColumnHeader text='Share in %' />
           <ColumnHeader text='Starting balance' />
           <ColumnHeader text='Total expenses' />
           <ColumnHeader text='Final balance' />
-          <InputCell type='text' index={i} value={category.name} handleChange={handleChange} name='name'/>
-          <InputCell type='number' index={i} value={category.share.toString()} handleChange={handleChange} name='share'/>
+          <InputCell type='text' index={i} value={category.name} handleChange={handleChange} name='name' handleBlur={handleBlur} />
+          <InputCell type='number' index={i} value={category.share.toString()} handleChange={handleChange} name='share' handleBlur={handleBlur}/>
           <InputCell disabled={true} type='number' value={category.startingBalance.toString()} />
-          <InputCell disabled={true} type='text' />
-          <InputCell disabled={true} type='text' />
+          <InputCell disabled={true} type='text' value={categoryStates[i].expensesSum}/>
+          <InputCell disabled={true} type='text' value={categoryStates[i].finalBalance}/>
         </div>
         <div className={styles.expensesContainer}>
           <SectionTitle title='expenses' handleAddClick={handleAddExpClick} handleDelClick={handleDelExpClick} handleIconClick={handleIconClick} index={i} isContainerVisible={expensesState[i]} size='small'/>
@@ -111,15 +142,15 @@ export default function Budget({currentBudget, incomesSum}) {
               {category.expenses.map((expense, expIndex) => {
                 return (
                   <React.Fragment  key={expIndex}>
-                    <InputCell type='text' size='small' style={{gridColumn: '1/4'}}/>
-                    <InputCell type='text' size='small' style={{gridColumn: '4/-1', width: '50%'}} /> 
+                    <InputCell type='text' index={i} extraData={{expIndex, name: 'expenseName'}} size='small' style={{gridColumn: '1/4'}} value={expense.name} handleChange={handleChange} name='expenseName' handleBlur={handleBlur}/>
+                    <InputCell type='number' index={i} extraData={{expIndex, name: 'expenseAmount'}} size='small' style={{gridColumn: '4/-1', width: '50%'}} value={expense.amount.toString()} handleChange={handleChange} name='expenseAmount' handleBlur={handleBlur}/> 
                   </React.Fragment>
                 )
               })}
             </>}
           </div>
         </div>
-      </React.Fragment>)
+      </div>)
       })}
     </div>
   )

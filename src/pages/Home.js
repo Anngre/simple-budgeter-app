@@ -38,10 +38,7 @@ export default function Home() {
         name: '',
         share: 0,
         startingBalance: 0,
-        expenses: [{
-          name: '',
-          amount: 0
-        }],
+        expenses: []
       }]    
     })
   }
