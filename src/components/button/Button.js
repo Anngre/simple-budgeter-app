@@ -15,12 +15,12 @@ const buttonClasses  = {
   medium: styles.btnMedium,
   small: styles.btnSmall
 }
-export default function Button({label, onClick, type='square', size='regular', color}) {
+export default function Button({label, onClick, type='square', size='regular', color='green', style}) {
 
   const className = `${buttonClasses.btn} ${buttonClasses[type]} ${buttonClasses[size]} ${buttonClasses[color]}`
   
 
   return (
-    <button className={className} onClick={onClick}>{label}</button>
+    <button className={className} onClick={onClick} style={style}>{label}</button>
   )
 }

@@ -14,6 +14,7 @@ import Budget from '../components/budget/Budget'
 
 export default function Home() {
   const [isCreateBoxVisible, setIsCreateBoxVisible] = useState(false)
+  const [isModalOpen, setIsModalOpen] =useState(false)
   const [budgetTitle, setBudgetTitle] = useState('')
   const { user } = useAuthContext()
   const { addDocument, isPending: addDocIsPending, error: addDocError, docID: newBudgetID } = useAddDocument()
@@ -64,12 +65,13 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.sidebarContainer}>sidebar</div>
-      <div className={styles.budgetContainer}>    
+      {currentBudget  && <div className={styles.sidebarContainer}>sidebar</div>}
+      <div className={styles.budgetContainer}>
+      
         {currentBudget ?
           <>
             <Income currentBudget={currentBudget} setIncomesSum={setIncomesSum}/>
-            <Budget currentBudget={currentBudget} incomesSum={incomesSum}/>
+            <Budget currentBudget={currentBudget} incomesSum={incomesSum} handleModal={setIsModalOpen}/>
           </> : (
             <>
           {isCreateBoxVisible ? (
@@ -79,7 +81,7 @@ export default function Home() {
           ) : (
             <div className={styles.createBox}>
               <p>Manage your money:</p>
-              <Button label='start' onClick={handleClick} type='square' size='regular' color='green'/>
+              <Button label='start' onClick={handleClick} style={{textTransform: 'uppercase'}}/>
             </div>
           )}
         </>

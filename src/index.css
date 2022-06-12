@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600&family=Raleway:wght@400;500;600;700&display=swap');
 
 :root {
   --main-color: #b2f2bb;
@@ -22,16 +22,16 @@
 }
 
 html {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Libre Franklin', sans-serif;
   font-size: 62.5%;
   box-sizing: border-box;
   letter-spacing: 1px;
 }
 
+
 body {
   font-weight: 400;
   line-height: 1.6;
-  height: 100vh;
   font-size: 1.8rem;
 }
 

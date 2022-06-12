@@ -7,7 +7,7 @@ export default function Form({ children, buttonLabel, onSubmit }) {
     <div className={styles.formContainer}>
       <form onSubmit={onSubmit}>
         {children}
-        <Button label={buttonLabel} color='green'/>
+        <Button label={buttonLabel}/>
       </form>
     </div>
   )

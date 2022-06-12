@@ -3,11 +3,12 @@ import { useUpdateDocument } from '../../hooks/useUpdateDocument'
 import SectionTitle from '../section/SectionTitle'
 import InputCell from '../input/InputCell'
 import ColumnHeader from '../section/ColumnHeader'
+import Button from '../button/Button'
 import Error from '../error/Error'
 import styles from './Budget.module.css'
 
 
-export default function Budget({currentBudget, incomesSum}) {
+export default function Budget({currentBudget, incomesSum, handleModal}) {
   const [categories, setCategories] = useState(currentBudget.categories)
   const [expensesState, setExpensesState] = useState(categories.map((category) => {
     return false
@@ -152,6 +153,7 @@ export default function Budget({currentBudget, incomesSum}) {
         </div>
       </div>)
       })}
+      <Button label='Next budget' onClick={() => handleModal(true)} size='small' style={{textTransform: 'uppercase', width: '25%', alignSelf: 'end', fontSize: '1rem'}}/>
     </div>
   )
 }

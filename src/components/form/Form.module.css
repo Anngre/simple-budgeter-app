@@ -1,6 +1,6 @@
 .formContainer {
   max-width: 400px;
-  margin: 0 auto;
+  margin: 8rem auto;
   box-shadow: 1px 0px 12px 0px var(--highlight-color);
   border-radius: 8px;
 }
