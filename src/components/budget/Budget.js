@@ -30,7 +30,7 @@ export default function Budget({currentBudget, incomesSum, handleModal}) {
 
   useEffect(() => {
     setCategories(categories.map((category) => {
-      return {...category, startingBalance: Math.round(category.share * incomesSum) / 100 }
+      return {...category, startingBalance: category.previousFinalBalance + Math.round(category.share * incomesSum) / 100}
     }))
   }, [incomesSum])
 
@@ -89,10 +89,10 @@ export default function Budget({currentBudget, incomesSum, handleModal}) {
           if (share >= 0  && categories.reduce((acc, category, i) => {
             return acc + (index === i ? share : category.share)
           }, 0) <= 100) {
-            return {...category, share, startingBalance: Math.round(share * incomesSum) / 100}
+            return {...category, share, startingBalance: category.previousFinalBalance + Math.round(share * incomesSum) / 100}
           }       
          else {
-            return {...category, share: 0, startingBalance: 0}
+            return {...category, share: 0, startingBalance: category.previousFinalBalance}
           }
         case 'expenseName':
         case 'expenseAmount':
