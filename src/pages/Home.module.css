@@ -1,5 +1,7 @@
 .container {
-  display: flex;
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-template-rows: min-content auto;
 }
 .sidebarContainer {
   width: 20rem;

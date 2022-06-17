@@ -4,6 +4,7 @@ import Input from '../components/input/Input'
 import Error from '../components/error/Error'
 import { useSignup } from '../hooks/useSignup'
 import Spinner from '../components/spinner/Spinner'
+import Navbar from '../components/navbar/Navbar'
 
 export default function Signup() {
   const [displayName, setDisplayName] = useState('')
@@ -17,15 +18,16 @@ export default function Signup() {
   }
 
   return (
-    <>
-      {isPending ? <Spinner /> :
-        (<Form buttonLabel='Signup' onSubmit={handleSubmit}>
-          <Input text='Your name:' type='text' onChange={setDisplayName} value={displayName}/>
-          <Input text='Email:' type='email' onChange={setEmail} value={email}/>
-          <Input text='Password:' type='password' onChange={setPassword} value={password}/>
-          {error && <Error error={error} />}
-        </Form>)
-      }
-    </>
+   <div>
+     <Navbar  />
+     {isPending ? <Spinner /> :
+       (<Form buttonLabel='Signup' onSubmit={handleSubmit}>
+         <Input text='Your name:' type='text' onChange={setDisplayName} value={displayName} autoFocus={true}/>
+         <Input text='Email:' type='email' onChange={setEmail} value={email}/>
+         <Input text='Password:' type='password' onChange={setPassword} value={password}/>
+         {error && <Error error={error} />}
+       </Form>)
+     }
+   </div>
   )
 }

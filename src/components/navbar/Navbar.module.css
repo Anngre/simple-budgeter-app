@@ -1,5 +1,6 @@
 .navbar {
   background: var(--main-color);
+  grid-column: 1/-1;
 }
 
 .navbar ul {

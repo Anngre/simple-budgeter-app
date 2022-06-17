@@ -1,6 +1,5 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext';
-import Navbar from './components/navbar/Navbar';
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
@@ -11,7 +10,6 @@ function App() {
     <div className="App">
       { authIsReady &&
       <BrowserRouter>
-        <Navbar />
         <Routes>
           <Route path='/' element={user ? <Home /> : <Login />} />
           <Route path='/login' element={<Login />} />

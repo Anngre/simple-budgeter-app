@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { useAddDocument } from '../hooks/useAddDocument'
 import { useGetDocument } from '../hooks/useGetDocument'
+import Navbar from '../components/navbar/Navbar';
 import Spinner from '../components/spinner/Spinner'
 import Error from '../components/error/Error'
 import Form from '../components/form/Form'
@@ -76,9 +77,9 @@ export default function Home() {
   }
 
 
-
-
   
+
+
 
   if (addDocIsPending || getCurrentBudgetIsPending || userDocIsPending) {
     return <Spinner />
@@ -91,6 +92,7 @@ export default function Home() {
   return (
     <>
       <div className={styles.container}>
+      <Navbar />
         {currentBudget  && <div className={styles.sidebarContainer}>sidebar</div>}
         <div className={styles.budgetContainer}>   
           {currentBudget && !isCreateBoxVisible ?
@@ -101,7 +103,7 @@ export default function Home() {
               <>
             {isCreateBoxVisible ? (
               <Form buttonLabel='create' onSubmit={handleSubmit}>
-                <Input text='Set a title for your budget:' type='text' onChange={setBudgetTitle} value={budgetTitle} />
+                <Input text='Set a title for your budget:' type='text' onChange={setBudgetTitle} value={budgetTitle}  autoFocus={true}/>
               </Form> 
             ) : (
               <div className={styles.createBox}>

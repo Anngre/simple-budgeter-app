@@ -4,6 +4,7 @@ import Form from '../components/form/Form'
 import Input from '../components/input/Input'
 import Error from '../components/error/Error'
 import Spinner from '../components/spinner/Spinner'
+import Navbar from '../components/navbar/Navbar'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -16,14 +17,14 @@ export default function Login() {
   }
 
   return (
-    <>
-      {isPending ? <Spinner /> : 
-       (<Form buttonLabel='Login' onSubmit={handleSubmit}>
-          <Input text='Email:' type='email' onChange={setEmail} value={email}/>
-          <Input text='Password:' type='password' onChange={setPassword} value={password}/>
-          {error && <Error error={error}/>}
-        </Form>)
-      }
-    </>
+      <div>
+        <Navbar />
+        {isPending ? <Spinner /> : 
+        (<Form buttonLabel='Login' onSubmit={handleSubmit}>
+            <Input text='Email:' type='email' onChange={setEmail} value={email} autoFocus={true}/>
+            <Input text='Password:' type='password' onChange={setPassword} value={password}/>
+            {error && <Error error={error}/>}
+          </Form>)}
+      </div>
   )
 }

@@ -6,6 +6,7 @@ import ColumnHeader from '../section/ColumnHeader'
 import Button from '../button/Button'
 import Error from '../error/Error'
 import styles from './Budget.module.css'
+import { calculateStartingBalance } from '../../utilities/Utilities'
 
 
 export default function Budget({currentBudget, incomesSum, handleModal}) {
@@ -30,7 +31,7 @@ export default function Budget({currentBudget, incomesSum, handleModal}) {
 
   useEffect(() => {
     setCategories(categories.map((category) => {
-      return {...category, startingBalance: category.previousFinalBalance + Math.round(category.share * incomesSum) / 100}
+      return {...category, startingBalance: calculateStartingBalance(category.previousFinalBalance, incomesSum, category.share )}
     }))
   }, [incomesSum])
 
@@ -89,7 +90,7 @@ export default function Budget({currentBudget, incomesSum, handleModal}) {
           if (share >= 0  && categories.reduce((acc, category, i) => {
             return acc + (index === i ? share : category.share)
           }, 0) <= 100) {
-            return {...category, share, startingBalance: category.previousFinalBalance + Math.round(share * incomesSum) / 100}
+            return {...category, share, startingBalance: calculateStartingBalance(category.previousFinalBalance, incomesSum, category.share )}
           }       
          else {
             return {...category, share: 0, startingBalance: category.previousFinalBalance}

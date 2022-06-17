@@ -5,6 +5,7 @@ import Error from '../error/Error'
 import styles from './Income.module.css'
 import InputCell from '../input/InputCell'
 import ColumnHeader from '../section/ColumnHeader'
+import { calculateStartingBalance } from '../../utilities/Utilities'
 
 
 export default function Income({currentBudget, setIncomesSum}) {
@@ -52,7 +53,9 @@ export default function Income({currentBudget, setIncomesSum}) {
   }
 
   const handleBlur = () => {
-    updateDocument('budgets', currentBudget.docID, {incomes, incomesSum})
+    updateDocument('budgets', currentBudget.docID, {incomes, incomesSum, categories: currentBudget.categories.map((category) => {
+      return {...category, startingBalance: calculateStartingBalance(category.previousFinalBalance, incomesSum, category.share )}
+    })})
   }
 
   return (
