@@ -1,6 +1,6 @@
 import { db, auth } from './config'
 import { createUserWithEmailAndPassword, updateProfile ,signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, serverTimestamp, doc, setDoc, onSnapshot, updateDoc } from 'firebase/firestore'
+import { addDoc, collection, serverTimestamp, doc, setDoc, onSnapshot, updateDoc, query, where, QuerySnapshot } from 'firebase/firestore'
 
 
 class API {
@@ -43,6 +43,12 @@ class API {
 
   observeDocument(collectionName,  docID, onDocChange, onDocChangeError) {
     return onSnapshot(doc(db, collectionName, docID), onDocChange, onDocChangeError)
+  }
+
+  observeSelectedDocument(collectionName, request, onDocsChange, onDocsChangeError) {
+    const [dataOne, isEqual, dataTwo] = [...request]
+    const q = query(collection(db, collectionName), where(dataOne, isEqual, dataTwo))
+    return onSnapshot(q, onDocsChange, onDocsChangeError)
   }
   
 }

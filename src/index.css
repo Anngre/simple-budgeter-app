@@ -36,10 +36,6 @@ body {
   position: relative;
 }
 
-html, body, #root, .App, .App>div {
-  height: 100%
-}
-
 ul {
   list-style: none;
 }
