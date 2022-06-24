@@ -1,6 +1,7 @@
 .navbar {
   background: var(--main-color);
   grid-column: 1/-1;
+  background: linear-gradient(180deg, var(--main-color) 90%, var(--highlight-second-color) 100%);
 }
 
 .navbar ul {

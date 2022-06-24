@@ -3,8 +3,10 @@
 :root {
   --main-color: #b2f2bb;
   --secondary-color: #ffa8a8;
+  --background-color: #fff;
   --neutral-color: #ebfbee;
   --highlight-color: #37b24d;
+  --highlight-second-color: #ffe066;
   --contrast-color: #fa5252;
   --text-color: #343a40;
   --error-color: #ff8787;
@@ -34,6 +36,7 @@ body {
   line-height: 1.6;
   font-size: 1.8rem;
   position: relative;
+  background: var(--background-color);
 }
 
 ul {

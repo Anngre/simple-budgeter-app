@@ -6,7 +6,6 @@
 .sidebarContainer {
   width: 20rem;
   text-align: center;
-  border-right: 2px solid var(--main-color);
 }
 
 .budgetContainer { 

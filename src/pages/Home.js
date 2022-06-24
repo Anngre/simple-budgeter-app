@@ -10,6 +10,7 @@ import Income from '../components/income/Income'
 import Budget from '../components/budget/Budget'
 import Modal from '../components/modal/Modal'
 import CreateBox from '../components/createBox/CreateBox';
+import Sidebar from '../components/sidebar/Sidebar';
 
 
 export default function Home() {
@@ -67,7 +68,7 @@ export default function Home() {
         </div>}
         {currentView === 'budget' && 
         <>
-          <div className={styles.sidebarContainer}>sidebar</div>
+          <div className={styles.sidebarContainer}><Sidebar /></div>
           <div className={styles.budgetContainer}>   
             <Income currentBudget={currentBudget} setIncomesSum={setIncomesSum}/>
             <Budget currentBudget={currentBudget} incomesSum={incomesSum} handleModal={setIsModalOpen}/>
