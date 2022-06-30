@@ -27,7 +27,10 @@ export default function Navbar() {
     
       <div className={styles.navbar}>
         <ul>
-          <li className={styles.logo}>Simple Budgeter</li>
+          <li className={styles.logo}>
+            <span>Simple Budgeter</span>
+            <div className={styles.logoElement}/>
+          </li>
           {!user ? 
           (<>
             <li><NavLink className={({ isActive }) => isActive ? styles.active : ''} to='/login'>Login</NavLink></li>

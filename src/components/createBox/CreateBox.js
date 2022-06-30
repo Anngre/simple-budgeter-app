@@ -23,6 +23,7 @@ export default function CreateBox({currentBudget, onBudgetCreated}) {
   const createBudget = async (previousBudget) => {
     await addDocument('budgets', {
       budgetTitle,
+      previousBudgetTitle: previousBudget ? previousBudget.budgetTitle : null,
       createdBy: user.uid,
       incomes: [{type: '', amount: 0}],
       incomesSum: 0,

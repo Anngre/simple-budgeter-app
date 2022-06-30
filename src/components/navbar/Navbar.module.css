@@ -16,6 +16,24 @@
   letter-spacing: 2px;
   margin-right: auto;
   border-bottom: 2px solid var(--highlight-color);
+  position: relative;
+}
+
+.logo span {
+  display: inline-block;
+  z-index: 2;
+  position: relative;
+}
+
+.logoElement {
+  position: absolute;
+  bottom: -1.3rem;
+  left: 10.5rem;
+  width: 0px; 
+  height: 0px; 
+  border-left: 27px solid transparent;
+  border-right: 27px solid transparent;
+  border-top: 42px solid var(--highlight-second-color);
 }
 
 .navbar a {

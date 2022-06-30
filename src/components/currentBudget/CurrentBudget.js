@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useUpdateDocument } from '../../hooks/useUpdateDocument'
 import SectionTitle from '../section/SectionTitle'
 import InputCell from '../input/InputCell'
 import ColumnHeader from '../section/ColumnHeader'
 import Button from '../button/Button'
 import Error from '../error/Error'
-import styles from './Budget.module.css'
 import { calculateStartingBalance } from '../../utilities/Utilities'
+import styles from './CurrentBudget.module.css'
 
 
 export default function Budget({currentBudget, incomesSum, handleModal}) {
@@ -90,7 +90,7 @@ export default function Budget({currentBudget, incomesSum, handleModal}) {
           if (share >= 0  && categories.reduce((acc, category, i) => {
             return acc + (index === i ? share : category.share)
           }, 0) <= 100) {
-            return {...category, share, startingBalance: calculateStartingBalance(category.previousFinalBalance, incomesSum, category.share )}
+            return {...category, share, startingBalance: calculateStartingBalance(category.previousFinalBalance, incomesSum, share)}
           }       
          else {
             return {...category, share: 0, startingBalance: category.previousFinalBalance}

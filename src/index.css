@@ -12,6 +12,10 @@
   --error-color: #ff8787;
   --transition-fast: 0.15s ease-in;
   --transition-slow: 0.2s ease-in;
+  --font-big: 2.4rem;
+  --font-regular: 1.8rem;
+  --font-medium: 1.4rem;
+  --font-small: 1.2rem;
 }
 
 * {
@@ -26,8 +30,10 @@
 html {
   font-family: 'Libre Franklin', sans-serif;
   font-size: 62.5%;
+  color: var(--text-color);
   box-sizing: border-box;
   letter-spacing: 1px;
+  height: 100%;
 }
 
 
@@ -37,6 +43,10 @@ body {
   font-size: 1.8rem;
   position: relative;
   background: var(--background-color);
+}
+
+html, body, #root, .App, .App > div {
+  height: 100%;
 }
 
 ul {

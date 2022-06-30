@@ -2,6 +2,7 @@
   background: var(--neutral-color);
   height: 100%;
   padding: 2rem 0;
+  width: 30rem;
 }
 
 .listTitle {
@@ -15,7 +16,7 @@
 .budgetsList {
   display: flex;
   flex-direction: column;
-  padding-left: 2rem;
+  padding-left: 4rem;
 }
 
 .budgetsList a {

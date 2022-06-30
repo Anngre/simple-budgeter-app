@@ -1,0 +1,85 @@
+.container {
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-template-rows: min-content auto;
+  
+}
+
+.budget {
+  width: 70rem;
+  margin: 8rem auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 4rem;
+  font-size: var(--font-medium);
+  font-weight: 500;
+}
+
+.incomesContainer, .categoryContainer, .titleContainer {
+  background: var(--main-color);
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px 0px var(--highlight-color);
+  padding: 3rem;
+}
+
+.incomesContainer {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.categoryContainer {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  row-gap: 4px;
+}
+
+.budget h1, .budget h2 {
+  grid-column: 1/-1;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.budget h1 {
+  text-align: center;
+  font-size: var(--font-big);
+  font-style: italic;
+}
+
+.budget h2 {
+  font-size: var(--font-regular);
+  text-transform: uppercase;
+}
+
+.summary {
+  font-size: var(--font-medium);
+  text-transform: uppercase;
+  padding-top: 4px;
+}
+
+.totalExpensesBox {
+  display: flex;
+  align-items: flex-end;
+}
+
+.text, .amount, .totalExpensesBox, .expenseAmount, .summary {
+  border-bottom: 1px solid var(--text-color);
+  margin-top: 2px;
+}
+.expense, .expenseAmount {
+  font-style: italic;
+  font-size: var(--font-small);
+  border-bottom: 1px solid var(--highlight-color);
+
+}
+
+.totalExpensesBox span {
+  border: none;
+}
+
+.amount, .expenseAmount {
+  text-align: end;
+  align-self: end;
+}
+
+

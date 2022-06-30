@@ -18,20 +18,6 @@
   letter-spacing: 2px;
 }
 
-.icon {
-  display: flex;
-  background: var(--main-color);
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  transition: var(--transition-fast);  
-}
-
-.icon:hover {
-  cursor: pointer;
-  background: var(--highlight-color);
-}
-
 .buttonsContainer {
   display: flex;
   margin-left: auto;

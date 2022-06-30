@@ -14,7 +14,7 @@ export default function Sidebar() {
         <li className={styles.listTitle}>Your budgets:</li>
         {budgetsList.map((budget, i) => {
         return (<li key={i}>
-           <NavLink to={i === 0 ? '/' : budget.docID} className={({ isActive }) => isActive ? styles.active : ''}><span>{i === 0 ? 'Current budget' : budget.budgetTitle}</span></NavLink>
+           <NavLink to={i === 0 ? '/' : `/${budget.docID}`} className={({ isActive }) => isActive ? styles.active : ''}><span>{i === 0 ? 'Current budget' : budget.budgetTitle}</span></NavLink>
         </li> )
         })}
       </ul>

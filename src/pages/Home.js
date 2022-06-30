@@ -7,7 +7,7 @@ import Error from '../components/error/Error'
 import Button from '../components/button/Button'
 import styles from './Home.module.css'
 import Income from '../components/income/Income'
-import Budget from '../components/budget/Budget'
+import CurrentBudget from '../components/currentBudget/CurrentBudget'
 import Modal from '../components/modal/Modal'
 import CreateBox from '../components/createBox/CreateBox';
 import Sidebar from '../components/sidebar/Sidebar';
@@ -68,10 +68,10 @@ export default function Home() {
         </div>}
         {currentView === 'budget' && 
         <>
-          <div className={styles.sidebarContainer}><Sidebar /></div>
+          <Sidebar />
           <div className={styles.budgetContainer}>   
             <Income currentBudget={currentBudget} setIncomesSum={setIncomesSum}/>
-            <Budget currentBudget={currentBudget} incomesSum={incomesSum} handleModal={setIsModalOpen}/>
+            <CurrentBudget currentBudget={currentBudget} incomesSum={incomesSum} handleModal={setIsModalOpen}/>
           </div>
         </>}
         {currentView === 'newBudget' && 
