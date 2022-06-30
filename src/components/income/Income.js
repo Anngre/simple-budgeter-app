@@ -23,7 +23,7 @@ export default function Income({currentBudget, setIncomesSum}) {
   },[incomesSum])
 
   const handleAddClick = () => {
-    setIncomes([...incomes, {type: '', amount: 0}])
+    setIncomes([...incomes, {name: '', amount: 0}])
   }
 
   const handleDelClick = () => {
@@ -37,7 +37,7 @@ export default function Income({currentBudget, setIncomesSum}) {
       if(i !== index) {
         return income
       }  
-      return (name === 'type' ? {...income, type: value || ''} : {...income, amount: parseFloat(value) || 0}) 
+      return (name === 'name' ? {...income, name: value || ''} : {...income, amount: parseFloat(value) || 0}) 
     }))
   }
 
@@ -67,7 +67,7 @@ export default function Income({currentBudget, setIncomesSum}) {
         <ColumnHeader text='Amount' />
         {incomes.map((income, i) => {
           return (<React.Fragment key={i}>
-            <InputCell index={i} type='text' value={income.type || ''} handleChange={handleChange} name='type' onKeyUp={handleKeyUp} handleBlur={handleBlur}/>
+            <InputCell index={i} type='text' value={income.name || ''} handleChange={handleChange} name='name' onKeyUp={handleKeyUp} handleBlur={handleBlur}/>
             <InputCell index={i} type='number' value={income.amount.toString()} handleChange={handleAmountChange} name='amount' onKeyUp={handleKeyUp} handleBlur={handleBlur}/>
           </React.Fragment>)
         })}

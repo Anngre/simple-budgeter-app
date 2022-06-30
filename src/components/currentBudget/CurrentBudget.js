@@ -9,7 +9,7 @@ import { calculateStartingBalance } from '../../utilities/Utilities'
 import styles from './CurrentBudget.module.css'
 
 
-export default function Budget({currentBudget, incomesSum, handleModal}) {
+export default function CurrentBudget({currentBudget, incomesSum, handleModal}) {
   const [categories, setCategories] = useState(currentBudget.categories)
   const [expensesState, setExpensesState] = useState(categories.map((category) => {
     return false
@@ -40,6 +40,7 @@ export default function Budget({currentBudget, incomesSum, handleModal}) {
       name: '',
       share: 0,
       startingBalance: 0,
+      previousFinalBalance: 0,
       expenses: []
     }])
     setExpensesState([...expensesState, false])

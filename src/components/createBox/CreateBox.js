@@ -25,7 +25,7 @@ export default function CreateBox({currentBudget, onBudgetCreated}) {
       budgetTitle,
       previousBudgetTitle: previousBudget ? previousBudget.budgetTitle : null,
       createdBy: user.uid,
-      incomes: [{type: '', amount: 0}],
+      incomes: [{name: '', amount: 0}],
       incomesSum: 0,
       categories: previousBudget ? previousBudget.categories.map((category)  => {
         const previousFinalBalance = category.startingBalance - category.expenses.reduce((acc, exp) => { return acc + exp.amount },0)

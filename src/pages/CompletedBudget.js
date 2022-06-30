@@ -6,7 +6,7 @@ import Navbar from "../components/navbar/Navbar";
 import Sidebar from "../components/sidebar/Sidebar";
 import styles from './CompletedBudget.module.css'
 
-export default function BudgetView() {
+export default function CompletedBudget() {
   const { id } = useParams()
   const { document: budget, isPending, error } = useGetDocument('budgets', id)
   const [expensesState, setExpensesState] = useState([])
@@ -37,7 +37,7 @@ export default function BudgetView() {
           <h2>{budget.incomes.length > 1 ? 'Incomes' : 'Income'}</h2>
           {budget.incomes.map((income, i) => {
             return (<React.Fragment key={i}>
-              <span className={styles.text}>{income.type || `Income #${i+1}`}</span>
+              <span className={styles.text}>{income.name || `Income #${i+1}`}</span>
               <div className={styles.amount}>{income.amount}</div>
           </React.Fragment>)
           })}
