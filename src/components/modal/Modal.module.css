@@ -13,11 +13,12 @@
 }
 
 .modal {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   max-width: 60rem;
-  padding: 2.5rem 4rem;
+  padding: 4rem 6rem;
   background: var(--neutral-color);
   box-shadow: 0px 0px 10px 0px var(--highlight-color);
   border-radius: 8px;
@@ -31,4 +32,11 @@
 .modal span {
   text-align: center;
   margin-bottom: 1.5rem;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  cursor: pointer;
 }

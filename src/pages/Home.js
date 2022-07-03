@@ -33,15 +33,15 @@ export default function Home() {
     setIsModalOpen(false)
   }
 
-  if (getCurrentBudgetIsPending || userDocIsPending) {
-    return <Spinner />
-  }
-
   if (getCurrentBudgetError || userDocError) {
     return <Error error={getCurrentBudgetError || userDocError}/>
   }
 
   const currentView = (() => {
+    if  (!userDoc ||  getCurrentBudgetIsPending || userDocIsPending) {
+      return 'loading'
+    }
+
     if (!currentBudget && !isCreateBoxVisible) {
       return 'start'
     }
@@ -61,6 +61,7 @@ export default function Home() {
     <>
       <div className={styles.container}>
         <Navbar />
+        {currentView === 'loading' && <div className={styles.spinnerContainer}><Spinner /></div>}
         {(currentView === 'start') &&
         <div className={styles.startBox}>
           <p>Manage your money:</p>
@@ -80,7 +81,7 @@ export default function Home() {
         </div>}        
       </div>
         {isModalOpen && 
-        <Modal onBackgroundClick={hideModal} text='Do you want to set up a new budget based on your current categories and their final balances?'>
+        <Modal onClose={hideModal} text='Do you want to set up a new budget based on your current categories and their final balances?'>
           <Button label='Yes - include current data' size='small' onClick={() => handleCreateBudgetClick(true)} />
           <Button label='No - start from scratch' size='small' color='red' onClick={() => handleCreateBudgetClick(false)}/>
         </Modal>}

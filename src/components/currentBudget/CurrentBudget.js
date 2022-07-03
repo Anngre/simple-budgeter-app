@@ -11,7 +11,7 @@ import styles from './CurrentBudget.module.css'
 
 export default function CurrentBudget({currentBudget, incomesSum, handleModal}) {
   const [categories, setCategories] = useState(currentBudget.categories)
-  const [expensesState, setExpensesState] = useState(categories.map((category) => {
+  const [expensesState, setExpensesState] = useState(categories.map(() => {
     return false
   }))
 
@@ -25,7 +25,6 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
     }
   })
 
-  console.log(categories);
   const { updateDocument, error } = useUpdateDocument()
   
 
@@ -68,7 +67,9 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
           return expIndex === index ? false : expense
         }))
       }
-      return i === index ? {...category, expenses: category.expenses.slice(0, -1)} : category
+     
+      return i === index && expensesState[index] ? {...category, expenses: category.expenses.slice(0, -1)} : category
+      
     }))
     
   }
@@ -136,7 +137,7 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
           <InputCell disabled={true} type='text' value={categoryStates[i].finalBalance}/>
         </div>
         <div className={styles.expensesContainer}>
-          <SectionTitle title='expenses' handleAddClick={handleAddExpClick} handleDelClick={handleDelExpClick} handleIconClick={handleIconClick} index={i} isContainerVisible={expensesState[i]} size='small'/>
+          <SectionTitle title='expenses' handleAddClick={handleAddExpClick} handleDelClick={handleDelExpClick} handleIconClick={() => {category.expenses.length > 0 && handleIconClick(i)}} index={i} isContainerVisible={expensesState[i]} size='small'/>
           <div className={styles.expensesDetails}>
             {category.expenses.length > 0 && expensesState[i] &&
             <>

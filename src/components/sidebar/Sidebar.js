@@ -7,7 +7,7 @@ export default function Sidebar() {
   const { user } = useAuthContext()
   const { documents } = useGetSelectedDocument('budgets', ["createdBy",  "==", user.uid])
   const budgetsList = documents.sort((a, b) => b.createdAt  - a.createdAt)
-  console.log(budgetsList);
+
   return (
     <div className={styles.sidebar}>
       <ul className={styles.budgetsList}>

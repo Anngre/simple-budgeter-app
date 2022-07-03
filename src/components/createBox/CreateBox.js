@@ -11,6 +11,7 @@ export default function CreateBox({currentBudget, onBudgetCreated}) {
   const [budgetTitle, setBudgetTitle] = useState('')
   const { user } = useAuthContext()
   const { addDocument, error, isPending, docID: newBudgetID } = useAddDocument()
+  
   useEffect(() => {
     if (newBudgetID) {
       addDocument('users',{
