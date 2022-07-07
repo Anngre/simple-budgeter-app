@@ -24,19 +24,18 @@ export default function Navbar() {
   }
 
   return (
-    
-      <div className={styles.navbar}>
-        <ul>
-          <li className={styles.logo}>
-            <span>Simple Budgeter</span>
-            <div className={styles.logoElement}/>
-          </li>
-          {!user ? 
-          (<>
-            <li><NavLink className={({ isActive }) => isActive ? styles.active : ''} to='/login'>Login</NavLink></li>
-            <li><NavLink className={({ isActive }) => isActive ? styles.active : ''} to='/signup'>Signup</NavLink></li>
-          </>) : (<li><Button label='Logout' onClick={handleClick} color='green'/></li>)}     
-        </ul>
+        <div className={styles.navbar}>
+          <ul>
+            <li className={styles.logo}>
+              <span>Simple Budgeter</span>
+              <div className={styles.logoElement}/>
+            </li>
+            {!user ? 
+            (<>
+              <li><NavLink className={({ isActive }) => isActive ? styles.active : ''} to='/login'>Login</NavLink></li>
+              <li><NavLink className={({ isActive }) => isActive ? styles.active : ''} to='/signup'>Signup</NavLink></li>
+            </>) : (<li><Button label='Logout' onClick={handleClick} color='green'/></li>)}     
+          </ul>
       </div>
      
   )

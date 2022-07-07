@@ -45,10 +45,6 @@ body {
   background: var(--background-color);
 }
 
-html, body, #root, .App, .App > div {
-  min-height: 100vh;
-  min-width: fit-content;
-}
 
 ul {
   list-style: none;

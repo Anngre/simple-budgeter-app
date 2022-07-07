@@ -32,7 +32,7 @@ export default function CompletedBudget() {
       {isPending ? <div className={styles.spinnerContainer}><Spinner /></div> :
       <>
         <Sidebar />
-        {budget && <div className={styles.budget}>
+        {budget && <div className={styles.budgetContainer}><div className={styles.budget}>
           <div className={styles.titleContainer}>
             <h1>{budget.budgetTitle}</h1>
           </div>
@@ -76,6 +76,7 @@ export default function CompletedBudget() {
             <div className={styles.amount}>{category.startingBalance - expensesSum}</div>
           </div>)
           })}
+          </div>
         </div>}
       </>}
       
