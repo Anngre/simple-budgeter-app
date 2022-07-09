@@ -5,7 +5,7 @@ export const useThemeContext = () => {
   const context = useContext(ThemeContext)
 
   if (!context) {
-    throw Error('useAuthContext must be used inside ThemeContextProvider')
+    throw Error('useThemeContext must be used inside ThemeContextProvider')
   }
 
   return context
