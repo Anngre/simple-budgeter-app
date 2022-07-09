@@ -1,5 +1,5 @@
 .inputCell {
-  color: var(--text-color);
+  color: var(--input-text-color);
   font-size: inherit;
   font-family: inherit;
   font-weight: 500;
@@ -17,5 +17,5 @@
 }
 .inputCell:disabled {
   box-shadow: 0px 1px 1px 1px var(--highlight-color);
-  background: var(--neutral-color)
+  background: var(--disabled-input-background-color)
 }

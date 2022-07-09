@@ -156,7 +156,7 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
         </div>
       </div>)
       })}
-      <Button label='Next budget' onClick={() => handleModal(true)} size='small' style={{textTransform: 'uppercase', width: '25%', alignSelf: 'end', fontSize: '1rem'}}/>
+      <Button label='Next budget' onClick={() => handleModal(true)} size='small' style={{textTransform: 'uppercase', width: '25%', alignSelf: 'end', fontSize: '1.2rem'}}/>
     </div>
   )
 }

@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-color);
   letter-spacing: 1px;
   cursor: pointer;
   border: none;

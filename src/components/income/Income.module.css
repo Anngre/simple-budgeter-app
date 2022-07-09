@@ -1,10 +1,10 @@
 .incomesContainer {
   max-width: 100rem;
   margin-top: 6rem;
+  color: var(--text-color);
 }
 
 .budgetTitle {
-  color: var(--text-color);
   font-weight: 600;
   font-size: 2.4rem;
   font-style: italic;
@@ -26,12 +26,12 @@
 }
 
 .incomeTotal, .incomeTotalAmount {
-  color: var(--text-color);
+  color: var(--input-text-color);
   font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background: var(--neutral-color);
+  background: var(--disabled-input-background-color);
   border-radius: 8px;
   box-shadow: 0px 1px 1px 1px var(--highlight-color);
   padding: 4px 8px;

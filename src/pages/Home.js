@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { useThemeContext } from '../hooks/useThemeContext';
 import { useGetDocument } from '../hooks/useGetDocument'
 import Navbar from '../components/navbar/Navbar';
 import Spinner from '../components/spinner/Spinner'
@@ -11,6 +12,7 @@ import CurrentBudget from '../components/currentBudget/CurrentBudget'
 import Modal from '../components/modal/Modal'
 import CreateBox from '../components/createBox/CreateBox';
 import Sidebar from '../components/sidebar/Sidebar';
+import Icon from '../components/Icon/Icon';
 
 
 export default function Home() {
@@ -22,6 +24,7 @@ export default function Home() {
   const currentBudgetID = userDoc?.currentBudgetID
   const { document: currentBudget, isPending: getCurrentBudgetIsPending, error: getCurrentBudgetError } = useGetDocument('budgets', currentBudgetID)
   const [incomesSum, setIncomesSum] = useState(null)
+  const { toggleDarkMode } = useThemeContext()
 
   const handleCreateBudgetClick = (isCurrentBudgetNeeded) => {
     setIsCurrentBudgetNeeded(isCurrentBudgetNeeded)
@@ -70,7 +73,10 @@ export default function Home() {
         {currentView === 'budget' && 
         <>
           <Sidebar />
-          <div className={styles.budgetContainer}>   
+          <div className={styles.budgetContainer}>
+            <div className={styles.iconContainer}>
+              <Icon name='modeIcon' handleIconClick={() => toggleDarkMode()}/>   
+            </div>
             <Income currentBudget={currentBudget} setIncomesSum={setIncomesSum}/>
             <CurrentBudget currentBudget={currentBudget} incomesSum={incomesSum} handleModal={setIsModalOpen}/>
           </div>

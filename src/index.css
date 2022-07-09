@@ -4,11 +4,13 @@
   --main-color: #b2f2bb;
   --secondary-color: #ffa8a8;
   --background-color: #fff;
+  --disabled-input-background-color: #ebfbee;
   --neutral-color: #ebfbee;
   --highlight-color: #37b24d;
   --highlight-second-color: #ffe066;
   --contrast-color: #fa5252;
   --text-color: #343a40;
+  --input-text-color: #212529;
   --error-color: #ff8787;
   --transition-fast: 0.15s ease-in;
   --transition-slow: 0.2s ease-in;
@@ -17,6 +19,13 @@
   --font-medium: 1.4rem;
   --font-small: 1.2rem;
 }
+
+.darkModeActive {
+  --background-color: #495057;
+  --text-color: #ebfbee;
+  --neutral-color: #343a40;
+}
+
 
 * {
   margin: 0;

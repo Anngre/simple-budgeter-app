@@ -4,12 +4,16 @@
   background: linear-gradient(180deg, var(--main-color) 90%, var(--highlight-second-color) 100%);
 }
 
+:global(.darkModeActive) .navbar {
+  filter: brightness(90%);
+}
+
 .navbar ul {
   display: flex;
   align-items: center;
   justify-content: end;
   gap: 20px;
-  padding: 20px 40px;
+  padding: 2rem 4rem;
 }
 
 .logo {

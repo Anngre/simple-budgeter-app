@@ -1,5 +1,6 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext';
+import { useThemeContext } from './hooks/useThemeContext';
 import CompletedBudget from './pages/CompletedBudget';
 import Home from './pages/Home'
 import Login from './pages/Login'
@@ -7,8 +8,10 @@ import Signup from './pages/Signup'
 
 function App() {
   const {user, authIsReady} = useAuthContext()
+  const {isDarkModeActive} = useThemeContext()
+  
   return (
-    <div className="App">
+    <div className={isDarkModeActive ? 'App darkModeActive' : 'App'}>
       { authIsReady &&
       <BrowserRouter>
         <Routes>
