@@ -43,9 +43,15 @@
 .navbar a {
   transition: all var(--transition-fast);
   text-decoration: none;
-  color: var(--text-color);
+  color: inherit;
 }
 
 .navbar a:hover, .navbar .active {
   border-bottom: 2px solid var(--highlight-color);
+}
+
+.iconContainer {
+  cursor: pointer;
+  margin-left: -15px;
+  align-self: flex-end;
 }

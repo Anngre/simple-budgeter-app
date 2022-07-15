@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
-import { useThemeContext } from '../hooks/useThemeContext';
 import { useGetDocument } from '../hooks/useGetDocument'
-import Navbar from '../components/navbar/Navbar';
 import Spinner from '../components/spinner/Spinner'
 import Error from '../components/error/Error'
 import Button from '../components/button/Button'
@@ -11,9 +9,7 @@ import Income from '../components/income/Income'
 import CurrentBudget from '../components/currentBudget/CurrentBudget'
 import Modal from '../components/modal/Modal'
 import CreateBox from '../components/createBox/CreateBox';
-import Sidebar from '../components/sidebar/Sidebar';
-import Icon from '../components/Icon/Icon';
-
+import PageContainer from "../components/pageContainer/PageContainer";
 
 export default function Home() {
   const [isCreateBoxVisible, setIsCreateBoxVisible] = useState(false)
@@ -24,7 +20,6 @@ export default function Home() {
   const currentBudgetID = userDoc?.currentBudgetID
   const { document: currentBudget, isPending: getCurrentBudgetIsPending, error: getCurrentBudgetError } = useGetDocument('budgets', currentBudgetID)
   const [incomesSum, setIncomesSum] = useState(null)
-  const { toggleDarkMode } = useThemeContext()
 
   const handleCreateBudgetClick = (isCurrentBudgetNeeded) => {
     setIsCurrentBudgetNeeded(isCurrentBudgetNeeded)
@@ -61,36 +56,30 @@ export default function Home() {
   })()
 
   return (
-    <>
-      <div className={styles.container}>
-        <Navbar />
-        {currentView === 'loading' && <div className={styles.spinnerContainer}><Spinner /></div>}
-        {(currentView === 'start') &&
-        <div className={styles.startBox}>
-          <p>Manage your money:</p>
-          <Button label='start' onClick={() => handleCreateBudgetClick(false)} style={{textTransform: 'uppercase'}}/>
-        </div>}
-        {currentView === 'budget' && 
-        <>
-          <Sidebar />
-          <div className={styles.budgetContainer}>
-            <div className={styles.iconContainer}>
-              <Icon name='modeIcon' handleIconClick={() => toggleDarkMode()}/>   
-            </div>
-            <Income currentBudget={currentBudget} setIncomesSum={setIncomesSum}/>
-            <CurrentBudget currentBudget={currentBudget} incomesSum={incomesSum} handleModal={setIsModalOpen}/>
-          </div>
-        </>}
+    <PageContainer isSidebarVisible={currentView === 'budget'}>
+      {currentView === 'loading' && <div className={styles.spinnerContainer}><Spinner /></div>}
+      {(currentView === 'start') &&
+      <div className={styles.startBox}>
+        <p>Manage your money:</p>
+        <Button label='start' onClick={() => handleCreateBudgetClick(false)} style={{textTransform: 'uppercase'}}/>
+      </div>}
         {currentView === 'newBudget' && 
         <div className={styles.createBoxContainer}>
           <CreateBox currentBudget={isCurrentBudgetNeeded ? currentBudget : null} onBudgetCreated={() =>  setIsCreateBoxVisible(false)}/>
         </div>}        
-      </div>
+        {currentView === 'budget' && 
+          <div className={styles.container}>
+            <div className={styles.budgetContainer}>
+              <Income currentBudget={currentBudget} setIncomesSum={setIncomesSum}/>
+              <CurrentBudget currentBudget={currentBudget} incomesSum={incomesSum} handleModal={setIsModalOpen}/>
+            </div>
+          </div>}
         {isModalOpen && 
         <Modal onClose={hideModal} text='Do you want to set up a new budget based on your current categories and their final balances?'>
           <Button label='Yes - include current data' size='small' onClick={() => handleCreateBudgetClick(true)} />
           <Button label='No - start from scratch' size='small' color='red' onClick={() => handleCreateBudgetClick(false)}/>
         </Modal>}
-    </>
+      </PageContainer>
+    
   )
 }

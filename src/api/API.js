@@ -6,12 +6,12 @@ import { addDoc, collection, serverTimestamp, doc, setDoc, onSnapshot, updateDoc
 class API {
 
   async signupUser(email, password, displayName) {
-    await createUserWithEmailAndPassword(auth, email, password)
-
+    const response = await createUserWithEmailAndPassword(auth, email, password)
     await updateProfile(auth.currentUser, {
-        displayName
-      })
-     }
+      displayName
+    })
+    return response.user.uid
+    }
   
   async loginUser(email, password) {
     await signInWithEmailAndPassword(auth, email, password) 

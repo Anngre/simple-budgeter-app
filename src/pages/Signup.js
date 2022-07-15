@@ -15,6 +15,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     await signup(email, password, displayName);
+    
   }
 
   return (

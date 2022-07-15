@@ -30,6 +30,7 @@
 }
 
 .modal span {
+  color: var(--text-color);
   text-align: center;
   margin-bottom: 1.5rem;
 }

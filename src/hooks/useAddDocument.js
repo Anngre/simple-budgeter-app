@@ -1,6 +1,5 @@
 import { useRequest } from "./useRequest";
 import API from "../api/API";
-import { useState } from "react";
 
 export const useAddDocument = () => {
   const addDocument = async (collectionName, document,  docID) => {

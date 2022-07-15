@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useAddDocument } from '../../hooks/useAddDocument'
+import { useUpdateDocument } from '../../hooks/useUpdateDocument'
 import Form from '../form/Form'
 import Input from '../input/Input'
 import Spinner from '../spinner/Spinner'
@@ -11,12 +12,13 @@ export default function CreateBox({currentBudget, onBudgetCreated}) {
   const [budgetTitle, setBudgetTitle] = useState('')
   const { user } = useAuthContext()
   const { addDocument, error, isPending, docID: newBudgetID } = useAddDocument()
+  const { updateDocument, error: updateDocError, isPending: updateDocIsPending } = useUpdateDocument()
   
   useEffect(() => {
     if (newBudgetID) {
-      addDocument('users',{
-        currentBudgetID: newBudgetID
-      }, user.uid)
+      updateDocument('users', user.uid, {
+        currentBudgetID: newBudgetID,
+      })
       onBudgetCreated && onBudgetCreated()
     }
   },[newBudgetID])
@@ -53,12 +55,12 @@ export default function CreateBox({currentBudget, onBudgetCreated}) {
     setBudgetTitle('')
   }
 
-  if (isPending) {
+  if (isPending || updateDocIsPending) {
     return <Spinner />
   }
 
-  if (error) {
-    return <Error error={error}/>
+  if (error || updateDocError) {
+    return <Error error={error || updateDocError}/>
   }
 
   return (
