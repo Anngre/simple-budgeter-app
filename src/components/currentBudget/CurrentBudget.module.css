@@ -13,6 +13,7 @@
 
 .budgets {
   column-gap: 1.2rem;
+  row-gap: 2px;
   width: 100%;
   font-size: 1.2rem;
   align-items: end;
@@ -20,6 +21,7 @@
 }
 
 .categoryContainer {
+  padding: 1.5rem 2rem;
   border-radius: 8px;
   box-shadow: 0px 0px 4px 1px var(--main-color);
 }

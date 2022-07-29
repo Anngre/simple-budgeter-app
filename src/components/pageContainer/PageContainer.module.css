@@ -7,5 +7,11 @@
   background: var(--background-color);
 }
 
+@media (max-width: 62.5rem) {
+  .container {
+    grid-template-columns: auto;
+  }
+}
+
 
 

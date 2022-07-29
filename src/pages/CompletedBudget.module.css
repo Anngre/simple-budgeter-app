@@ -10,7 +10,8 @@
   margin: 0 auto;
   padding: 8rem 4rem 3.2rem 4rem;
   display: flex;
-  flex-direction: column;     row-gap: 4rem;
+  flex-direction: column;     
+  row-gap: 4rem;
   font-size: var(--font-medium);
   font-weight: 500;
 }

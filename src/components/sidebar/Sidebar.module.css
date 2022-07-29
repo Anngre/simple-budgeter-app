@@ -7,17 +7,19 @@
 }
 
 .listTitle {
+  padding: 1.2rem 0.8rem 1.2rem;  
   font-size: 1.6rem;
   font-weight: 500;
   letter-spacing: 2px;
-  margin-bottom: 1.6rem;
+  border-left: 2px solid var(--highlight-second-color);
 }
 
 .budgetsList {
-  display: flex;
   flex-direction: column;
-  padding-left: 4rem;
+  justify-items: center;
+  padding: 0 4rem;
 }
+
 
 .budgetsList a {
   padding: 1.2rem;
@@ -29,17 +31,57 @@
   font-weight: 500;
 }
 
-.budgetsList a:hover {
-  cursor: auto;
-}
-
 .budgetsList span:hover {
-  border-bottom: 1px solid;
-  cursor: pointer;
+  border-bottom: 1px solid var(--text-color);
+
+}
+.inactive {
+  border-left: 2px solid var(--highlight-second-color);
 }
 
 .active {
-  border-radius: 8px 0 0 8px;
-  background-color: var(--background-color);
-  box-shadow: -2px 0px 4px 0px var(--highlight-second-color);
+  box-shadow: -6px 0px 9px -6px var(--highlight-color);
+  border-left: 2px solid var(--highlight-color);
+
+}
+
+.active span  {
+  margin-left: 1rem;
+}
+
+
+@media (max-width: 62.5rem) {
+  .sidebar {
+    position: fixed;
+    max-height: 75vh;
+    width: 400px;
+    padding-top: 78.5px;
+    left: 50%;
+    z-index: 4;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  :global(.sidebar-transition-appear), :global(.sidebar-transition-appear-active), :global(.sidebar-transition-appear-done), :global(.sidebar-transition-enter), :global(.sidebar-transition-exit-done) {
+    transform: translate(-50%, -100%);
+  } 
+
+
+  :global(.sidebar-transition-enter-active) {
+    transform: translate(-50%, 0);
+    transition: all 400ms ease-in;
+  }
+
+  :global(.sidebar-transition-enter-done), :global(.sidebar-transition-exit)  {
+    transform: translate(-50%, 0);
+  }
+
+  
+  :global(.sidebar-transition-exit-active) {
+    transform: translate(-50%, -100%);
+    transition: all 400ms ease-in-out;
+  }
+
+
+  
 }
