@@ -20,7 +20,7 @@ export const useGetSelectedDocument = (collectionName, whereClause) => {
       setIsPending(false)
     })
     return unsub
-  },[])
+  },[collectionName, whereClause])
 
   return { documents, isPending, error }
 }

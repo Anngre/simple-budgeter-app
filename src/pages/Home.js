@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { useGetDocument } from '../hooks/useGetDocument'
 import Spinner from '../components/spinner/Spinner'
@@ -30,6 +30,10 @@ export default function Home() {
   const hideModal = () => {
     setIsModalOpen(false)
   }
+
+  const hideCreateBox = useCallback(() => {
+    setIsCreateBoxVisible(false)
+  }, [])
 
   if (getCurrentBudgetError || userDocError) {
     return <Error error={getCurrentBudgetError || userDocError}/>
@@ -65,7 +69,7 @@ export default function Home() {
       </div>}
         {currentView === 'newBudget' && 
         <div className={styles.createBoxContainer}>
-          <CreateBox currentBudget={isCurrentBudgetNeeded ? currentBudget : null} onBudgetCreated={() =>  setIsCreateBoxVisible(false)}/>
+          <CreateBox currentBudget={isCurrentBudgetNeeded ? currentBudget : null} onBudgetCreated={hideCreateBox}/>
         </div>}        
         {currentView === 'budget' && 
           <div className={styles.container}>

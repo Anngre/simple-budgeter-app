@@ -21,7 +21,7 @@ export default function CreateBox({currentBudget, onBudgetCreated}) {
       })
       onBudgetCreated && onBudgetCreated()
     }
-  },[newBudgetID])
+  },[newBudgetID, onBudgetCreated, updateDocument, user.uid])
 
   const createBudget = async (previousBudget) => {
     await addDocument('budgets', {

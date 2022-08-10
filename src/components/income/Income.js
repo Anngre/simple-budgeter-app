@@ -20,7 +20,7 @@ export default function Income({currentBudget, setIncomesSum}) {
 
   useEffect(() =>  {
     setIncomesSum(incomesSum)
-  },[incomesSum])
+  },[incomesSum, setIncomesSum])
 
   const handleAddClick = () => {
     setIncomes([...incomes, {name: '', amount: 0}])

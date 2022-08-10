@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Button from '../button/Button'
 import Icon from '../Icon/Icon'
 import styles from './SectionTitle.module.css'

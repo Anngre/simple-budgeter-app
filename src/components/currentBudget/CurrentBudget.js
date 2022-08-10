@@ -27,11 +27,12 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
 
   const { updateDocument, error } = useUpdateDocument()
   
-
   useEffect(() => {
-    setCategories(categories.map((category) => {
-      return {...category, startingBalance: calculateStartingBalance(category.previousFinalBalance, incomesSum, category.share )}
-    }))
+    setCategories((prevCategories) => {
+      return prevCategories.map((category) => {
+        return {...category, startingBalance: calculateStartingBalance(category.previousFinalBalance, incomesSum, category.share)}
+      })
+    })
   }, [incomesSum])
 
   const handleAddClick = () => {

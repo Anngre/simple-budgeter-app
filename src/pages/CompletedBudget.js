@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import  { useGetDocument } from '../hooks/useGetDocument'
+import Error from "../components/error/Error";
 import Icon from "../components/Icon/Icon";
 import styles from './CompletedBudget.module.css'
 import Spinner from "../components/spinner/Spinner";
@@ -27,6 +28,7 @@ export default function CompletedBudget() {
   }
   return (
     <PageContainer>
+        {error &&  <Error error='There was a problem with loading your data. Please try  again.'/>}
         {isPending ? <div className={styles.spinnerContainer}><Spinner /></div> :
         <>
           {budget && <div className={styles.budgetContainer}><div className={styles.budget}>

@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useGetSelectedDocument } from '../../hooks/useGetSelectedDocument'
@@ -5,7 +6,10 @@ import styles from './Sidebar.module.css'
 
 export default function Sidebar({ onListItemClick }) {
   const { user } = useAuthContext()
-  const { documents } = useGetSelectedDocument('budgets', ["createdBy",  "==", user.uid])
+  const budgetsListClause = useMemo(() => {
+    return ["createdBy",  "==", user.uid]
+  }, [user.uid])
+  const { documents } = useGetSelectedDocument('budgets', budgetsListClause)
   const budgetsList = documents.sort((a, b) => b.createdAt  - a.createdAt)
 
   return (

@@ -14,7 +14,7 @@
 .navbarList {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 15px;
   padding: 2rem 4rem;
 }

@@ -16,7 +16,7 @@ export const useGetDocument = (collectionName, docID) => {
         })
       return unsub
     }
-  },[docID])
+  },[docID, collectionName])
 
   return { document, isPending, error }
   
