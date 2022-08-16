@@ -126,14 +126,14 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
         return ( 
       <div className={styles.categoryContainer} key={i}>
         <div className={styles.budgets}>
-          <ColumnHeader text='Name' />
-          <ColumnHeader text='Share in %' />
-          <ColumnHeader text='Starting balance' />
-          <ColumnHeader text='Total expenses' />
-          <ColumnHeader text='Final balance' />
-          <InputCell type='text' index={i} value={category.name} handleChange={handleChange} name='name' handleBlur={handleBlur} />
-          <InputCell type='number' index={i} value={category.share.toString()} handleChange={handleChange} name='share' handleBlur={handleBlur}/>
-          <InputCell disabled={true} type='number' value={category.startingBalance.toString()} />
+          <ColumnHeader text='Name' extraClassName={styles.name}/>
+          <ColumnHeader text='Share in %' extraClassName={styles.share}/>
+          <ColumnHeader text='Starting balance' extraClassName={styles.startingBalance}/>
+          <ColumnHeader text='Total expenses' extraClassName={styles.totalExpenses}/>
+          <ColumnHeader text='Final balance' extraClassName={styles.finalBalance}/>
+          <InputCell type='text' index={i} value={category.name} handleChange={handleChange} name='name' handleBlur={handleBlur} extraClassName={styles.nameInput}/>
+          <InputCell type='number' index={i} value={category.share.toString()} handleChange={handleChange} name='share' handleBlur={handleBlur} extraClassName={styles.shareInput}/>
+          <InputCell disabled={true} type='number' value={category.startingBalance.toString()}/>
           <InputCell disabled={true} type='text' value={categoryStates[i].expensesSum}/>
           <InputCell disabled={true} type='text' value={categoryStates[i].finalBalance}/>
         </div>

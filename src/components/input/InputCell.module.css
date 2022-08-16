@@ -9,6 +9,7 @@
   border-radius: 8px;
   padding: 4px 8px;
   transition: var(--transition-fast);
+  width: 100%;
 }
 
 

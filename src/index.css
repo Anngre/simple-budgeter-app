@@ -73,3 +73,10 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield;
 }
+
+@media  (max-width: 42rem) {
+  html { 
+    font-size: 56.25%;
+  }
+}
+
