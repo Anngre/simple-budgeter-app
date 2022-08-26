@@ -1,24 +1,10 @@
-import { useEffect, useState } from 'react'
 import Navbar from '../navbar/Navbar'
 import Sidebar from '../sidebar/Sidebar'
+import { useNarrowScreen } from '../../hooks/useNarrowScreen'
 import styles from './PageContainer.module.css'
 
 export default function PageContainer({ children, isSidebarVisible=true }) {
-  const mediaWatcher = window.matchMedia('(max-width: 1000px)')
-  const [isNarrowScreen, setIsNarrowScreen] = useState(mediaWatcher.matches)
-
-  useEffect(() => {
-    const updateIsNarrowScreen = (e) => {
-      setIsNarrowScreen(e.matches)
-    }
-
-    mediaWatcher.addEventListener('change', updateIsNarrowScreen)
-
-    return () => {
-      mediaWatcher.removeEventListener('change', updateIsNarrowScreen)
-    }
-  },[mediaWatcher])
-  
+  const isNarrowScreen = useNarrowScreen()
   
   return (
     <div className={styles.container}>

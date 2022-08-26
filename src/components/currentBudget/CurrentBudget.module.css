@@ -4,11 +4,12 @@
   flex-direction: column;
   gap: 3rem;
   color: var(--text-color);
+  margin-top: 1rem;
 }
 
 .budgets, .expensesDetails {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 6rem minmax(0, 1fr) minmax(0, 1fr)  minmax(0, 1fr);;
+  grid-template-columns: minmax(0, 1fr) 8.5rem minmax(0, 1fr) minmax(0, 1fr)  minmax(0, 1fr);;
 }
 
 .budgets {
@@ -42,12 +43,13 @@
 @media (max-width: 42rem) {
   .budgets {
     display: grid;
-    grid-template-columns: repeat(3, auto);
-    row-gap: 10px;
+    grid-template-columns: 3.5fr 2fr 101px;
+    row-gap: 2rem;
+    column-gap: 2.5rem;
   }
 
   .name, .share {
-    margin-bottom: -8px;
+    margin-bottom: -14px;
   }
 
   .name, .nameInput  {
@@ -60,7 +62,18 @@
 
   .startingBalance, .totalExpenses, .finalBalance  {
     grid-row: 3/4;
-    margin-bottom: -8px;
+    margin-bottom: -14px;
+  }
+}
+
+@media(max-width: 31rem) {
+  .budgets {
+    column-gap: 1.5rem;
+    grid-template-columns: 3.5fr 2fr 2.2fr;
+  }
+
+  .categoryContainer {
+    padding: 1.5rem 0.5rem;
   }
 }
 

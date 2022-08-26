@@ -10,5 +10,16 @@
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  padding: 80px 40px;
+  padding: 40px;
+}
+
+
+@media (max-width: 31rem) {
+  .formContainer{
+    width: 36rem;
+  }
+
+  .formContainer form {
+    padding: 30px;
+  }
 }

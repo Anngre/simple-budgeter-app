@@ -127,7 +127,7 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
       <div className={styles.categoryContainer} key={i}>
         <div className={styles.budgets}>
           <ColumnHeader text='Name' extraClassName={styles.name}/>
-          <ColumnHeader text='Share in %' extraClassName={styles.share}/>
+          <ColumnHeader text='Share(%)' extraClassName={styles.share}/>
           <ColumnHeader text='Starting balance' extraClassName={styles.startingBalance}/>
           <ColumnHeader text='Total expenses' extraClassName={styles.totalExpenses}/>
           <ColumnHeader text='Final balance' extraClassName={styles.finalBalance}/>
@@ -138,7 +138,7 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
           <InputCell disabled={true} type='text' value={categoryStates[i].finalBalance}/>
         </div>
         <div className={styles.expensesContainer}>
-          <SectionTitle title='expenses' handleAddClick={handleAddExpClick} handleDelClick={handleDelExpClick} handleIconClick={() => {category.expenses.length > 0 && handleIconClick(i)}} index={i} isContainerVisible={expensesState[i]} size='small'/>
+          <SectionTitle title='expenses' handleAddClick={handleAddExpClick} handleDelClick={handleDelExpClick} handleIconClick={() => {category.expenses.length > 0 ? handleIconClick(i) : handleAddExpClick(i)}} index={i} isContainerVisible={expensesState[i]} size='small'/>
           <div className={styles.expensesDetails}>
             {category.expenses.length > 0 && expensesState[i] &&
             <>

@@ -82,4 +82,18 @@
   align-self: end;
 }
 
+@media (max-width: 42rem) {
+  .budget {
+    width: 90%;
+    padding: 6rem 4rem 3.2rem 4rem;
+  }
+
+  .incomesContainer, .categoryContainer {
+    padding: 1rem 2rem 2rem 2rem;
+  }
+
+  .titleContainer {
+    padding: 1rem 2rem;
+  }
+}
 

@@ -52,3 +52,14 @@
   background: var(--contrast-color);
   color: #fff;
 }
+
+@media (max-width: 31rem) {
+  .btnCircle {
+    width: 20px;
+    height: 20px;
+  }
+
+  .btnMedium {
+    padding: 12px 12px;
+  }
+}
