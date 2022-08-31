@@ -5,10 +5,9 @@ import styles from './PageContainer.module.css'
 
 export default function PageContainer({ children, isSidebarVisible=true }) {
   const isNarrowScreen = useNarrowScreen()
-  
   return (
     <div className={styles.container}>
-      <Navbar isNarrowScreen={isNarrowScreen}/>
+      <Navbar />
       {!isNarrowScreen && isSidebarVisible && <Sidebar />}
       {children}
     </div>

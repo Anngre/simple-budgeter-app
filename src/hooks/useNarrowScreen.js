@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export  const useNarrowScreen = () => {
-  const mediaWatcher = window.matchMedia('(max-width: 1000px)')
-  const [isNarrowScreen, setIsNarrowScreen] = useState(mediaWatcher.matches)
+  const mediaWatcher = useRef(window.matchMedia('(max-width: 1000px)'))
+  const [isNarrowScreen, setIsNarrowScreen] = useState(mediaWatcher.current.matches)
 
   useEffect(() => {
     const updateIsNarrowScreen = (e) => {
       setIsNarrowScreen(e.matches)
     }
 
-    mediaWatcher.addEventListener('change', updateIsNarrowScreen)
+    mediaWatcher.current.addEventListener('change', updateIsNarrowScreen)
 
     return () => {
-      mediaWatcher.removeEventListener('change', updateIsNarrowScreen)
+      mediaWatcher.current.removeEventListener('change', updateIsNarrowScreen)
     }
-  },[mediaWatcher])
+  },[])
 
   return isNarrowScreen  
 }

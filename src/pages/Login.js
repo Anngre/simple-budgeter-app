@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useLogin } from '../hooks/useLogin'
-import { useNarrowScreen } from '../hooks/useNarrowScreen'
 import Form from '../components/form/Form'
 import Input from '../components/input/Input'
 import Error from '../components/error/Error'
@@ -11,7 +10,6 @@ export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { login, error, isPending } = useLogin()
-  const isNarrowScreen = useNarrowScreen()
   
   const handleSubmit = async (e) => {   
     e.preventDefault()
@@ -20,7 +18,7 @@ export default function Login() {
 
   return (
       <div>
-        <Navbar isNarrowScreen={isNarrowScreen}/>
+        <Navbar />
         {isPending ? <Spinner /> : 
         (<Form buttonLabel='Login' onSubmit={handleSubmit}>
             <Input text='Email:' type='email' onChange={setEmail} value={email} autoFocus={true}/>

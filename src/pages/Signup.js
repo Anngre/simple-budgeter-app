@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useSignup } from '../hooks/useSignup'
-import { useNarrowScreen } from '../hooks/useNarrowScreen'
 import Form from '../components/form/Form'
 import Input from '../components/input/Input'
 import Error from '../components/error/Error'
@@ -12,7 +11,6 @@ export default function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { signup, error, isPending } = useSignup()
-  const isNarrowScreen = useNarrowScreen()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -22,7 +20,7 @@ export default function Signup() {
 
   return (
    <div>
-     <Navbar isNarrowScreen={isNarrowScreen}/>
+     <Navbar />
      {isPending ? <Spinner /> :
        (<Form buttonLabel='Signup' onSubmit={handleSubmit}>
          <Input text='Your name:' type='text' onChange={setDisplayName} value={displayName} autoFocus={true}/>

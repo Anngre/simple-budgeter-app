@@ -5,6 +5,8 @@ import { useAuthContext } from '../../hooks/useAuthContext'
 import { useLogout } from '../../hooks/useLogout'
 import { useThemeContext } from '../../hooks/useThemeContext'
 import { useUpdateDocument } from '../../hooks/useUpdateDocument'
+import { useNarrowScreen } from '../../hooks/useNarrowScreen'
+
 
 import Button from '../button/Button'
 import Spinner from '../spinner/Spinner'
@@ -13,11 +15,12 @@ import Icon from '../Icon/Icon'
 import Sidebar from '../sidebar/Sidebar'
 import styles from './Navbar.module.css'
 
-export default function Navbar({isNarrowScreen}) {
+export default function Navbar() {
   const { user } = useAuthContext()
   const { logout, error, isPending } = useLogout()
   const { isDarkModeActive } = useThemeContext()
   const [isSidebarVisible, setIsSidebarVisible] = useState(false)
+  const isNarrowScreen = useNarrowScreen()
 
   const handleClick = async () => {
     await logout()
