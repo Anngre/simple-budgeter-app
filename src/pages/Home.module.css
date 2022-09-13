@@ -49,3 +49,9 @@
   right: 4rem;
   cursor: pointer;
 }
+
+@media (max-width: 31rem) {
+  .budgetContainer {
+    padding: 0 2rem 3.2rem 2rem;
+  }
+}

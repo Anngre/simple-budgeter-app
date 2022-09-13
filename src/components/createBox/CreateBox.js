@@ -41,7 +41,7 @@ export default function CreateBox({currentBudget, onBudgetCreated}) {
         }) : 
       [{
         name: '',
-        share: 0,
+        share: 100,
         startingBalance: 0,
         previousFinalBalance: 0,
         expenses: []

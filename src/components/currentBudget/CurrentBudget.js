@@ -5,7 +5,7 @@ import InputCell from '../input/InputCell'
 import ColumnHeader from '../section/ColumnHeader'
 import Button from '../button/Button'
 import Error from '../error/Error'
-import { calculateStartingBalance } from '../../utilities/Utilities'
+import { calculateStartingBalance, sumArray, roundToTwoDecimals } from '../../utilities/Utilities'
 import styles from './CurrentBudget.module.css'
 
 
@@ -16,12 +16,10 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
   }))
 
   const categoryStates = categories.map((category) => {
-    const expensesSum = Math.round((category.expenses.reduce((acc, expense) => {
-      return (acc + expense.amount)
-    }, 0)) * 100) / 100
+    const expensesSum = roundToTwoDecimals(sumArray(category.expenses, 'amount'))
     return {
       expensesSum,
-      finalBalance: category.startingBalance - expensesSum
+      finalBalance: roundToTwoDecimals((category.startingBalance - expensesSum))
     }
   })
 
@@ -35,11 +33,15 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
     })
   }, [incomesSum])
 
+  const totalExpenses = sumArray(categoryStates, 'expensesSum')
+
+  const totalShares = sumArray(categories, 'share')
+
   const handleAddClick = () => {
     setCategories([...categories, {
       name: '',
-      share: 0,
-      startingBalance: 0,
+      share: 100 - totalShares,
+      startingBalance: (100 - totalShares) * incomesSum / 100,
       previousFinalBalance: 0,
       expenses: []
     }])
@@ -72,7 +74,6 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
       return i === index && expensesState[index] ? {...category, expenses: category.expenses.slice(0, -1)} : category
       
     }))
-    
   }
 
   const handleIconClick = (index) => {
@@ -135,7 +136,7 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
           <InputCell type='number' index={i} value={category.share.toString()} handleChange={handleChange} name='share' handleBlur={handleBlur} extraClassName={styles.shareInput}/>
           <InputCell disabled={true} type='number' value={category.startingBalance.toString()}/>
           <InputCell disabled={true} type='text' value={categoryStates[i].expensesSum}/>
-          <InputCell disabled={true} type='text' value={categoryStates[i].finalBalance}/>
+          <InputCell disabled={true} type='text' value={categoryStates[i].finalBalance} extraClassName={categoryStates[i].finalBalance < 0 ? styles.negativeFinalBalance : ''}/>
         </div>
         <div className={styles.expensesContainer}>
           <SectionTitle title='expenses' handleAddClick={handleAddExpClick} handleDelClick={handleDelExpClick} handleIconClick={() => {category.expenses.length > 0 ? handleIconClick(i) : handleAddExpClick(i)}} index={i} isContainerVisible={expensesState[i]} size='small'/>
@@ -157,7 +158,13 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
         </div>
       </div>)
       })}
-      <Button label='Next budget' onClick={() => handleModal(true)} size='small' style={{textTransform: 'uppercase', width: '25%', alignSelf: 'end', fontSize: '1.2rem'}}/>
+      <div className={styles.budgetEnd}>
+        <ColumnHeader text='overall expenses:' style={{justifySelf: 'start', minWidth: '160px'}}/>
+        <ColumnHeader text='income to share:' style={{minWidth: '145px'}}/>
+        <div className={styles.overallExpenses}>{roundToTwoDecimals(totalExpenses)}</div>
+        <div className={styles.incomeToShare}>{roundToTwoDecimals((incomesSum - incomesSum * totalShares / 100))}</div>
+        <Button label='create next budget' onClick={() => handleModal(true)} size='small' style={{textTransform: 'uppercase', fontSize: '1.2rem', gridColumn: '1/-1'}}/>
+      </div>
     </div>
   )
 }

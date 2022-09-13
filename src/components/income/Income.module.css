@@ -1,6 +1,6 @@
 .incomesContainer {
   max-width: 100rem;
-  min-width: 30.6rem;
+  width: 100%;
   margin-top: 6rem;
   color: var(--text-color);
 }

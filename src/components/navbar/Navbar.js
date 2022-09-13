@@ -63,7 +63,7 @@ export default function Navbar() {
             !isNarrowScreen ? (<>
               <li><Button label='Logout' onClick={handleClick} color='green'/></li>
               <li className={styles.iconContainer} tabIndex='0'>
-                <Icon name='modeIcon' handleIconClick={toggleThemeMode} />   
+                <Icon name='themeIcon' handleIconClick={toggleThemeMode} />   
               </li> </>)  :   
               <li className={styles.iconContainer} tabIndex='0'>
                 <Icon name='menuIcon' handleIconClick={toggleSidebar} />   
