@@ -159,11 +159,15 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
       </div>)
       })}
       <div className={styles.budgetEnd}>
-        <ColumnHeader text='overall expenses:' style={{justifySelf: 'start', minWidth: '160px'}}/>
-        <ColumnHeader text='income to share:' style={{minWidth: '145px'}}/>
-        <div className={styles.overallExpenses}>{roundToTwoDecimals(totalExpenses)}</div>
+        <ColumnHeader text='income to share'/>
+        <ColumnHeader text='overall expenses'/>
+        <ColumnHeader text='budget balance'/>
         <div className={styles.incomeToShare}>{roundToTwoDecimals((incomesSum - incomesSum * totalShares / 100))}</div>
-        <Button label='create next budget' onClick={() => handleModal(true)} size='small' style={{textTransform: 'uppercase', fontSize: '1.2rem', gridColumn: '1/-1'}}/>
+        <div className={styles.overallExpenses}>{roundToTwoDecimals(totalExpenses)}</div>
+        <div className={styles.budgetBalance}>{categoryStates.reduce((acc, cat) => {
+          return acc + cat.finalBalance
+        },0)}</div>
+        <Button label='next budget' onClick={() => handleModal(true)} size='small' style={{textTransform: 'uppercase', fontSize: '1.2rem', gridColumn: '1/-1', marginTop: '1.5rem',  justifySelf: 'center', width: '50%',}}/>
       </div>
     </div>
   )

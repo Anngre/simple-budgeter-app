@@ -49,11 +49,12 @@
 
 .budgetEnd {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  align-items: end;
 }
 
-.overallExpenses, .incomeToShare {
+.overallExpenses, .incomeToShare, .budgetBalance {
   font-size: var(--font-small);
   font-weight: 600;
   letter-spacing: 3px;
@@ -61,7 +62,7 @@
   border: 1px solid var(--main-color);
   border-radius: 8px;
   padding: 0.2rem 1.2rem;
-  margin-top: -2rem;
+  margin-top: -1.5rem;
 }
 
 @media (max-width: 42rem) {
