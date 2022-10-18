@@ -47,11 +47,15 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
     }])
     setExpensesState([...expensesState, false])
   }
-  const handleDelClick = () => {
-    if (categories.length >1) {
-      setCategories(categories.slice(0, -1))
-      setExpensesState(expensesState.slice(0, -1))
-    }
+  const handleDelClick = (index) => {
+    const categoriesAfterRemove = categories.filter((category, i) => {
+      return i !== index
+    })
+    setExpensesState(expensesState.filter((exp, i)  => {
+      return i !== index
+    }))
+    setCategories(categoriesAfterRemove)
+    updateDataInAPI(categoriesAfterRemove)
   }
 
   const handleAddExpClick = (index) => {
@@ -113,15 +117,19 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
     ))
   }
 
-  const handleBlur  = () => {
+  const updateDataInAPI = (data) => {
     updateDocument('budgets', currentBudget.docID, {
-      categories
+      categories: data
     })
+  }
+
+  const handleBlur  = () => {
+    updateDataInAPI(categories)
   }
 
   return (
     <div className={styles.budgetContainer}>
-      <SectionTitle title='Budget categories:' handleAddClick={handleAddClick} handleDelClick={handleDelClick}/>
+      <SectionTitle title='Budget categories:' handleAddClick={handleAddClick}/>
       {error && <Error error='There was a problem with saving your data. Please type your changes in budget categories again.'/>}
       {categories.map((category, i) => {
         return ( 
@@ -149,13 +157,14 @@ export default function CurrentBudget({currentBudget, incomesSum, handleModal}) 
                 return (
                   <React.Fragment  key={expIndex}>
                     <InputCell type='text' index={i} extraData={{expIndex, name: 'expenseName'}} size='small' style={{gridColumn: '1/4'}} value={expense.name} handleChange={handleChange} name='expenseName' handleBlur={handleBlur}/>
-                    <InputCell type='number' index={i} extraData={{expIndex, name: 'expenseAmount'}} size='small' style={{gridColumn: '4/-1', width: '50%'}} value={expense.amount.toString()} handleChange={handleChange} name='expenseAmount' handleBlur={handleBlur}/> 
+                    <InputCell type='number' index={i} extraData={{expIndex, name: 'expenseAmount'}} style={{gridColumn: '4/-1', width: '50%'}} value={expense.amount.toString()} handleChange={handleChange} name='expenseAmount' handleBlur={handleBlur}/> 
                   </React.Fragment>
                 )
               })}
             </>}
           </div>
         </div>
+        <div className={styles.deleteButtonBox}><Button label='remove' size='small'  onClick={() => handleDelClick(i)} style={{width: '8rem', borderBottomLeftRadius: '0', borderBottomRightRadius: '0', padding: '0.4rem'}}/></div>
       </div>)
       })}
       <div className={styles.budgetEnd}>
