@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useLogout } from '../../hooks/useLogout'
@@ -21,6 +21,8 @@ export default function Navbar() {
   const { isDarkModeActive } = useThemeContext()
   const [isSidebarVisible, setIsSidebarVisible] = useState(false)
   const isNarrowScreen = useNarrowScreen()
+  const sidebarRef = useRef()
+  const overlayRef = useRef()
 
   const handleClick = async () => {
     await logout()
@@ -71,11 +73,11 @@ export default function Navbar() {
         </ul>
       </div>
       {isNarrowScreen && <>
-        <CSSTransition in={isSidebarVisible} timeout={400} classNames='sidebar-transition' unmountOnExit={true} appear={true}>
-            <Sidebar onListItemClick={toggleSidebar} isNarrowScreen={isNarrowScreen} onLogout={handleClick} toggleThemeMode={toggleThemeMode}/>
+        <CSSTransition in={isSidebarVisible} timeout={400} nodeRef={sidebarRef} classNames='sidebar-transition' unmountOnExit={true} appear={true}>
+            <Sidebar ref={sidebarRef} onListItemClick={toggleSidebar} isNarrowScreen={isNarrowScreen} onLogout={handleClick} toggleThemeMode={toggleThemeMode}/>
         </CSSTransition>
-        <CSSTransition in={isSidebarVisible} timeout={400} classNames='overlay-transition' unmountOnExit={true} appear={true}>
-        <div className={styles.overlay} onClick={() => setIsSidebarVisible(false)}/></CSSTransition>
+        <CSSTransition in={isSidebarVisible} timeout={400} nodeRef={overlayRef} classNames='overlay-transition' unmountOnExit={true} appear={true}>
+        <div ref={overlayRef} className={styles.overlay} onClick={() => setIsSidebarVisible(false)}/></CSSTransition>
       </>
         }
     </>

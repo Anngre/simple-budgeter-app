@@ -62,7 +62,7 @@ export default function CompletedBudget() {
               </>}
               <div className={styles.totalExpensesBox}>
                 <span className={styles.text}>Total expenses</span>
-                {expensesSum !== 0 && <Icon name={expensesState[i] ? 'hideIcon' : 'showIcon'} handleIconClick={() => handleIconClick(i)}/>}
+                {expensesSum !== 0 && <div className={styles.iconContainer}><Icon name={expensesState[i] ? 'hideIcon' : 'showIcon'} handleIconClick={() => handleIconClick(i)}/></div>}
               </div>
               <div className={styles.amount}>{expensesSum}</div>
               {expensesState[i] && category.expenses.map((expense, expIndex) => {
