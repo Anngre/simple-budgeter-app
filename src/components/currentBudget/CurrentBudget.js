@@ -23,7 +23,7 @@ export default function CurrentBudget({
       return false;
     })
   );
-  console.log(categories[0].startingBalance);
+
   const categoryStates = categories.map((category) => {
     const expensesSum = roundToTwoDecimals(
       sumArray(category.expenses, "amount")
@@ -332,7 +332,7 @@ export default function CurrentBudget({
           {roundToTwoDecimals(totalExpenses)}
         </div>
         <div className={styles.budgetBalance}>
-          {sumArray(categories, "startingBalance") +
+          {sumArray(categories, "previousFinalBalance") +
             incomesSum -
             roundToTwoDecimals(totalExpenses)}
         </div>
