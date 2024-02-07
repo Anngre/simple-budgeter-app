@@ -29,7 +29,6 @@ export default function Income({ currentBudget, setIncomesSum }) {
   const incomeToShare = roundToTwoDecimals(
     incomesSum - (incomesSum * totalShares) / 100
   );
-  console.log(incomeToShare);
 
   useEffect(() => {
     setIncomesSum(incomesSum);
